@@ -1,0 +1,180 @@
+Project{
+    background-color: #0F3B3B;
+}
+#buttonEdit {
+    width: 10px;
+    background-color: #52DADA;
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#buttonEdit:hover {
+    background-color: lightgoldenrodyellow;
+    color: #000000;
+}
+
+#buttonConvert {
+    width: 10px;
+    background-color: #52DADA;
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#buttonConvert:hover {
+    background-color: lightgoldenrodyellow;
+    color: #000000;
+}
+
+#buttonPesquisa {
+    background-color: #52DADA;
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#buttonPesquisa:hover {
+    background-color: lightgoldenrodyellow;
+    color: #000000;
+}
+#tela {
+    background-color: #007A7A;
+    color:white ;
+}
+#opcaoPainel {
+    background-color: #52DADA;
+    color:black;
+}
+#painelDown {
+    width: 100px; height: 100px;
+    background-color: white;
+}
+#painel_baixo {
+    color: white;
+    background-color: #007A7A;
+}
+#search {
+    background-color: #007A7A;
+    height: 100;
+}
+#edit {
+    color: white;
+    background-color: #007A7A;
+}
+#painel {
+    background-color: #0B5B5B;
+}
+#widget {
+    background-color: #0B5B5B;
+}
+
+#input_pd {
+    background-color: #0B5B5B;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#input_pd:hover {
+    background-color: #007A7A;
+}
+
+#button_search {
+    background-color: #0B5B5B;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#button_search:hover {
+    background-color: #007A7A;
+    color: black;
+}
+#table {
+    background-color: #52DADA;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#table::item {
+    padding: 1px;
+    border-bottom: 1px solid black;
+    border-right: 1px dashed black;
+}
+#table::item:selected {
+    background-color: #7DFAFA;
+    color: black;
+    font-weight: 100;
+}
+#painelDown {
+    background-color: #007A7A;
+}
+#text_area {
+    background-color: #0F3B3B;
+    color: white;
+}
+#label_avisos {
+    color: white;
+}
+#button_convert {
+    background-color: #52DADA;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#button_convert:hover {
+    background-color: #00FF00;
+    color: black;
+}
+#button_copy_html {
+    background-color: #52DADA;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#button_copy_html:hover {
+    background-color: #00FF00;
+    color: black;
+}
+#label_convert {
+    background-color: #124646;
+    color: white;
+}
+
+#input_add {
+    background-color: #0B5B5B;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#input_add:hover {
+    background-color: #007A7A;
+}
+#button_add {
+    background-color: #0B5B5B;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#button_add:hover {
+    background-color: #52DADA;
+    color: black;
+}
+
+#input_del {
+    background-color: #0B5B5B;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#input_del:hover {
+    background-color: #007A7A;
+}
+#button_del {
+    background-color: #0B5B5B;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#button_del:hover {
+    background-color: #52DADA;
+    color: black;
+}
