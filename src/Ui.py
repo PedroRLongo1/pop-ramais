@@ -311,9 +311,7 @@ class Project(QWidget):
         atualiza_tabela(self.table)
         
     def call_add(self):
-
-
-
+        
         new_ramal = self.input_new_ramal.text()
         new_name = self.input_new_nome.text()
         new_resp = self.input_new_resp.text()
