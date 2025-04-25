@@ -46,97 +46,93 @@ def converter_lis_pub():
             # Adiciona o ramal no subgrupo
             grouped_data[local_pub].append(ramal_f)
     # Começa a criação do HTML com a lista de grupos
-    html_output = "<div style=\"text-align: center; \"><div class=\"d-flex justify-content-center\"><table><tbody><tr><td colspan=\"2\"><p> </p>" \
-    "<p class=\"text-center\" style=\"text-align: center; \"><strong>TELEFONES ÚTEIS</strong></p><p class=\"text-center\" style=\"text-align: center; \">" \
-    "<strong>HOSPITAL UNIVERSITÁRIO DA GRANDE DOURADOS<br /></strong></p><p> </p></td></tr>"
+    html_output = "<div style=\"text-align: center; \"><div class=\"d-flex flex-column justify-content-center align-items-center\"><table><tbody><tr><td colspan=\"2\">" \
+                  "<p> </p><p class=\"text-center\" style=\"text-align: center; \"><strong>TELEFONES ÚTEIS</strong></p><p class=\"text-center\" style=\"text-align: center; \">" \
+                  "<strong>HOSPITAL UNIVERSITÁRIO DA GRANDE DOURADOS<br /></strong></p><p> </p></td></tr><tr><td colspan=\"2\"><p> </p><p class=\"text-center\"><strong>" \
+                  "​</strong></p></td></tr><div class=\"d-flex flex-column justify-content-center align-items-center\">"
 
     for local_pub, ramais in grouped_data.items():
-        html_output += f"<tr><td colspan=\"2\"><p> </p><p class=\"text-center\"><strong>{local_pub}</strong></p></td></tr><div>"
+        html_output += f"<tr><td colspan=\"2\"><p> </p><p class=\"text-center\"><strong>{local_pub}</strong></p></td></tr><table><tbody>"
 
         for ramal in ramais:
             html_output += ramal
-        html_output += "</div>"
+        html_output += "</tbody></table>"
 
-    html_output += "</tbody></table></div></div>"
+    html_output += "</div></tbody></table></div></div>"
 
     html_pub_output = html_output
     return html_pub_output
 
 
 def converter_lis_organograma():
-
     xls = pd.ExcelFile("src/Ramais.xlsx")
     db = pd.read_excel(xls, sheet_name=xls.sheet_names[0])
 
-    # Inicializa o dicionário para agrupar os dados
     grouped_data = {}
-
-    # Definir o caractere invisível
-    invisivel = "\u200B"  # Zero-width space (caractere invisível)
 
     for index, row in db.iterrows():
         if row['lista privada'] == 's':
             valor_ramal = str(row["ramal"])
+            valor_ramal = valor_ramal[:-2] if len(valor_ramal) > 4 else valor_ramal
+            valor_ramal = valor_ramal.zfill(4)  # garante que tenha 4 dígitos
 
-            if len(valor_ramal) > 4 :
-                valor_ramal = valor_ramal[:-2]
-            else:
-                valor_ramal = valor_ramal
+            ramal_f = f"<li><p><span>{row['nome']}</span><span class=\"text-nowrap\" style=\"text-align:end;\"> - {valor_ramal}</span></p></li>"
 
-            if len(valor_ramal) < 4 :
-                valor_ramal = f'0{valor_ramal}'
-            else:
-                valor_ramal = valor_ramal
+            gdsu_gerencia = row['Gerencia'] if pd.notna(row['Gerencia']) and row['Gerencia'] != "" else 'identificador_vazio_g'
+            gdsu_divisao = row['Divisao'] if pd.notna(row['Divisao']) and row['Divisao'] != "" else 'identificador_vazio_d'
+            gdsu_setor = row['Setor'] if pd.notna(row['Setor']) and row['Setor'] != "" else 'identificador_vazio_s'
+            gdsu_unidade = row['Unidade'] if pd.notna(row['Unidade']) and row['Unidade'] != "" else 'identificador_vazio_u'
 
-            ramal_f = f"<li><p>{row['nome']} - <strong>{valor_ramal}</strong></p></li>"
+            grouped_data.setdefault(gdsu_gerencia, {}) \
+                        .setdefault(gdsu_divisao, {}) \
+                        .setdefault(gdsu_setor, {}) \
+                        .setdefault(gdsu_unidade, []) \
+                        .append(ramal_f)
 
-            # Definir os grupos e subgrupos, com tratamento para NaN (substituindo por caractere invisível)
-            gdsu_gerencia = row['Gerencia'] if pd.notna(row['Gerencia']) and row['Gerencia'] != "" else invisivel
-            gdsu_divisao = row['Divisao'] if pd.notna(row['Divisao']) and row['Divisao'] != "" else invisivel
-            gdsu_setor = row['Setor'] if pd.notna(row['Setor']) and row['Setor'] != "" else invisivel
-            gdsu_unidade = row['Unidade'] if pd.notna(row['Unidade']) and row['Unidade'] != "" else invisivel
-
-            # Evitar chaves vazias no dicionário
-            if gdsu_gerencia not in grouped_data:
-                grouped_data[gdsu_gerencia] = {}
-
-            if gdsu_divisao not in grouped_data[gdsu_gerencia]:
-                grouped_data[gdsu_gerencia][gdsu_divisao] = {}
-
-            if gdsu_setor not in grouped_data[gdsu_gerencia][gdsu_divisao]:
-                grouped_data[gdsu_gerencia][gdsu_divisao][gdsu_setor] = {}
-
-            if gdsu_unidade not in grouped_data[gdsu_gerencia][gdsu_divisao][gdsu_setor]:
-                grouped_data[gdsu_gerencia][gdsu_divisao][gdsu_setor][gdsu_unidade] = []
-
-            # Adiciona o ramal no subgrupo
-            grouped_data[gdsu_gerencia][gdsu_divisao][gdsu_setor][gdsu_unidade].append(ramal_f)
-    # Começa a criação do HTML com a lista de grupos
-    html_output = "<div class=\"mt-5\"><p style=\"text-align: center; \"><strong>RAMAIS INTERNOS POR ORGANOGRAMA</strong></p><a class=\"toggle\"> HOSPITAL UNIVERSITÁRIO DA GRANDE DOURADOS </a><div class=\"conteudo\"><table><tbody><tr><td>"
+    html_output = """
+    <div class="mt-5"><div>
+    <p style="text-align: center; "><strong>RAMAIS INTERNOS POR ORGANOGRAMA</strong></p>
+    <a class="toggle">HOSPITAL UNIVERSITÁRIO DA GRANDE DOURADOS</a>
+    </div><table><tbody><tr><td>
+    """
 
     for gdsu_gerencia, divisoes in grouped_data.items():
-        html_output += f"<div class=\"d-flex flex-column\"><a class=\"toggle closed\">{gdsu_gerencia}</a><div class=\"conteudo\"><table><tbody><tr><td><ul><li>"  # abre a tag das gerencias
+        html_output += f"""
+        <div class="d-flex flex-column">
+        <a class="toggle closed">{'' if gdsu_gerencia == 'identificador_vazio_g' else gdsu_gerencia}</a>
+        <div class="conteudo"><table><tbody><tr><td><ul>
+        """
 
         for gdsu_divisao, setores in divisoes.items():
-            html_output += f"<div class=\"subNivOrganizacaoa\"><a class=\"toggle closed\">{gdsu_divisao}</a><div class=\"conteudo\"><table><tbody><tr><td><ul>"  # abre a tag das divisoes
+            html_output += f"""
+            <div class="subNivOrganizacaoa">
+            <a class="toggle closed">{'' if gdsu_divisao == 'identificador_vazio_d' else gdsu_divisao}</a>
+            <div class="conteudo"><table><tbody><tr><td>
+            """
 
             for gdsu_setor, unidades in setores.items():
-                html_output += f"<tr><td><p class=\"text-primary\">{gdsu_setor}</p><ul>"  # abre a tag dos setores
+                html_output += f"<p class='text-primary'>{'' if gdsu_setor == 'identificador_vazio_s' else gdsu_setor}</p><ul>"
 
                 for gdsu_unidade, ramais in unidades.items():
-                    html_output += f"<li><p class=\"text-primary\">{gdsu_unidade}</p><ul>"
+                    if gdsu_unidade == 'identificador_vazio_u':
+                        html_output += "<p></p>"
+                    else:
+                        html_output += f"<li><p class='text-primary'>{gdsu_unidade}</p><ul>"
 
                     for ramal in ramais:
-                        html_output += ramal  # Adiciona os ramais na lista do grupo
+                        html_output += ramal #ramal_f
 
-                    html_output += "</ul></li>"  # fecha a tag das unidades
-                html_output += "</ul></td></tr>"  # fecha a tag dos setores
-            html_output += "</ul></td></tr></tbody></table></div></div>"  # fecha a tag das divisoes
-        html_output += "</li></ul></td></tr></tbody></table></div></div>"  # fecha a tag das gerencias
-    html_output += "</td></tr></tbody></table></div></div>"
+                    html_output += "</ul> </li>" # Unidade
 
-    html_org_output = html_output
-    return html_org_output
+                html_output += "</ul>" # Setor
+
+            html_output += "</td></tr></tbody></table></div></div>" #Divisão
+
+        html_output += "</ul></td></tr></tbody></table></div></div>" #Gerencia
+
+    html_output += "</td></tr></tbody></table></div>" #geral
+
+    return html_output
 
 def converter_lis_pesquisa():
 
@@ -163,10 +159,10 @@ def converter_lis_pesquisa():
                 valor_ramal = valor_ramal
     
             ramal_f = f"<tr><td><p>{row['nome']}</p></td><td><p class=\"text-nowrap\" style=\"text-align: end;\"><span>{valor_ramal}</span></p></td></tr>"
-            gdsu_unidade = row['Unidade']
+            gdsu_unidade = row['Unidade'] if pd.notna(row['Unidade']) and row['Unidade'] != "" else 'identificador_vazio_u'
     
             if gdsu_unidade not in grouped_data:
-                grouped_data[gdsu_unidade] = []
+                grouped_data[gdsu_unidade] = [] 
     
             # Adiciona o ramal no subgrupo
             grouped_data[gdsu_unidade].append(ramal_f)
@@ -174,7 +170,7 @@ def converter_lis_pesquisa():
     # Começa a criação do HTML com a lista de grupos
     
     for gdsu_unidade, ramais in grouped_data.items():
-        html_output += f"<tr><td colspan=\"2\"><p class=\"text-center\"><strong>{gdsu_unidade}</strong></p></td></tr>"
+        html_output += f"<tr><td colspan=\"2\"><p class=\"text-center\"><strong>{'' if gdsu_unidade == 'identificador_vazio_u' else gdsu_unidade}</strong></p></td></tr>"
     
         for ramal in ramais:
             html_output += ramal  # Adiciona os ramais na lista do grupo

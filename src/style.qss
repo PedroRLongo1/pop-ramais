@@ -148,6 +148,17 @@ Project{
 #input_add:hover {
     background-color: #007A7A;
 }
+#button_edit {
+    background-color: #0B5B5B;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#button_edit:hover {
+    background-color: #52DADA;
+    color: black;
+}
+
 #button_add {
     background-color: #0B5B5B;
     color: white;

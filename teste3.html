@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>teste 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mt-5">
+    <div>
+    <p style="text-align: center; ">
+        <strong>RAMAIS INTERNOS POR ORGANOGRAMA</strong>
+    </p>
+    <a class="toggle">
+        HOSPITAL UNIVERSITÁRIO DA GRANDE DOURADOS
+    </a>
+    </div>
+    <table>
+    <tbody>
+    <tr>
+    <td>
+
+        <div class="d-flex flex-column">
+        <a class="toggle closed">
+            {'Sem Gerência' if gdsu_gerencia == 'identificador_vazio_g' else gdsu_gerencia}
+        </a>
+        <div class="conteudo">
+        <table>
+        <tbody>
+        <tr>
+        <td>
+        <ul>
+
+            <div class="subNivOrganizacaoa">
+            <a class="toggle closed">
+                {'Sem Divisão' if gdsu_divisao == 'identificador_vazio_d' else gdsu_divisao}
+            </a>
+            <div class="conteudo">
+            <table>
+            <tbody>
+            <tr>
+            <td>
+
+                <p class='text-primary'>
+                    {'Sem Setor' if gdsu_setor == 'identificador_vazio_s' else gdsu_setor}
+                </p>
+                <ul>
+
+                    <li>
+                    <p class='text-primary'>
+                        {gdsu_unidade}
+                    </p>
+                    <ul>
+
+                        <li>
+                        <p>
+                        <span>
+                            nome1
+                        </span>
+                        <span class=\"text-nowrap\" style=\"text-align:
+                        end;\">
+                         - Ramal
+                        </span>
+                        </p>
+                        </li>
+
+                    </ul>
+                    </li>
+                </ul>
+
+            </td>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+            </div>
+                                                    
+        </ul>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        </div>
+
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+</body>
+
+</html>

@@ -111,7 +111,7 @@ class Project(QWidget):
         self.input_value_edit = QLineEdit(placeholderText="qual o valor a ser substituido?")
         self.input_value_edit.setObjectName("input_pd")
         self.button_buscar_edit = QPushButton("atualizar")
-        self.button_buscar_edit.setObjectName("button_search")
+        self.button_buscar_edit.setObjectName("button_edit")
         self.button_buscar_edit.clicked.connect(self.call_editar)
 
         self.label_avisos_editar = QLabel("")
