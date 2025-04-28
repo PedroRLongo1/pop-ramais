@@ -65,7 +65,7 @@ class Project(QWidget):
         self.input_local = QComboBox()
         self.input_local.setObjectName("input_pd")
 
-        col_disp_pesquisa = ['id', 'ramal', 'nome', 'responsavel', 'Gerencia', 'Divisao', 'Setor', 'Unidade', 'lista privada', 'lista pub', 'type', 'ultima atualização', 'ultima modificação']
+        col_disp_pesquisa = ['id', 'ramal', 'nome', 'responsavel', 'Gerencia', 'Divisao', 'Setor', 'Unidade', 'lista privada', 'lista pub', 'type', 'local pub', 'nome_pub', 'ultima atualização', 'ultima modificação']
         self.input_local.addItems(col_disp_pesquisa)
 
         self.input_local.setObjectName("input_pd")
@@ -103,7 +103,7 @@ class Project(QWidget):
         self.input_collumn.setObjectName("input_pd")
 
         # Adicionando opções de colunas
-        col_disp_editar = ['ramal', 'nome', 'responsavel', 'Gerencia', 'Divisao', 'Setor', 'Unidade', 'lista privada', 'lista pub', 'type', 'ultima atualização', 'ultima modificação']  # Colunas que o usuário pode escolher
+        col_disp_editar = ['ramal', 'nome', 'responsavel', 'Gerencia', 'Divisao', 'Setor', 'Unidade', 'lista privada', 'lista pub', 'type', 'local pub', 'nome_pub', 'ultima atualização', 'ultima modificação']  # Colunas que o usuário pode escolher
         self.input_collumn.addItems(col_disp_editar)
 
         self.input_row = QLineEdit(placeholderText="qual o id do item?")
