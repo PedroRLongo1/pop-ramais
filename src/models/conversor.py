@@ -35,7 +35,14 @@ def converter_lis_pub():
             else:
                 valor_ramal = valor_ramal
 
-            ramal_f = f"<tr><td><p><span>{row['nome_pub']}</span></p></td><td><p class=\"text-nowrap\" style=\"text-align: end;\"><span>3410 - {valor_ramal}</span></p></td></tr>"
+            if row['type'] == 'P':
+                nome_ramal = row['nome_pub']
+            elif row['type'] == 'F':
+                nome_ramal = f"FILA - {row['nome_pub']}"
+            else:
+                nome_ramal = 'erro no nome ou tipo do ramal'
+
+            ramal_f = f"<tr><td><p><span>{nome_ramal}</span></p></td><td><p class=\"text-nowrap\" style=\"text-align: end;\"><span>3410 - {valor_ramal}</span></p></td></tr>"
 
             local_pub = row['local pub'] if pd.notna(row['Divisao']) and row['Divisao'] != "" else invisivel
 
@@ -76,7 +83,14 @@ def converter_lis_organograma():
             valor_ramal = valor_ramal[:-2] if len(valor_ramal) > 4 else valor_ramal
             valor_ramal = valor_ramal.zfill(4)  # garante que tenha 4 dígitos
 
-            ramal_f = f"<li><p><span>{row['nome']}</span><span class=\"text-nowrap\" style=\"text-align:end;\"> - {valor_ramal}</span></p></li>"
+            if row['type'] == 'P':
+                nome_ramal = row['nome']
+            elif row['type'] == 'F':
+                nome_ramal = f"FILA - {row['nome']}"
+            else:
+                nome_ramal = 'erro no nome ou tipo do ramal'
+
+            ramal_f = f"<li><p><span>{nome_ramal}</span><span class=\"text-nowrap\" style=\"text-align:end;\"> - {valor_ramal}</span></p></li>"
 
             gdsu_gerencia = row['Gerencia'] if pd.notna(row['Gerencia']) and row['Gerencia'] != "" else 'identificador_vazio_g'
             gdsu_divisao = row['Divisao'] if pd.notna(row['Divisao']) and row['Divisao'] != "" else 'identificador_vazio_d'
@@ -157,8 +171,15 @@ def converter_lis_pesquisa():
                 valor_ramal = f'0{valor_ramal}'
             else:
                 valor_ramal = valor_ramal
+
+            if row['type'] == 'P':
+                nome_ramal = row['nome']
+            elif row['type'] == 'F':
+                nome_ramal = f"FILA - {row['nome']}"
+            else:
+                nome_ramal = 'erro no nome ou tipo do ramal'
     
-            ramal_f = f"<tr><td><p>{row['nome']}</p></td><td><p class=\"text-nowrap\" style=\"text-align: end;\"><span>{valor_ramal}</span></p></td></tr>"
+            ramal_f = f"<tr><td><p>{nome_ramal}</p></td><td><p class=\"text-nowrap\" style=\"text-align: end;\"><span>{valor_ramal}</span></p></td></tr>"
             gdsu_unidade = row['Unidade'] if pd.notna(row['Unidade']) and row['Unidade'] != "" else 'identificador_vazio_u'
     
             if gdsu_unidade not in grouped_data:

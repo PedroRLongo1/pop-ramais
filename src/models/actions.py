@@ -23,6 +23,13 @@ def buscar(local, input_value_search, text_area):
                 else:
                     status_ramal = 'não exibir'
 
+                if row['type'] == 'P':
+                    nome_ramal = row['nome']
+                elif row['type'] == 'F':
+                    nome_ramal = f"FILA - {row['nome']}"
+                else:
+                    nome_ramal = 'erro no nome ou tipo do ramal'
+
                 if local == 'id' or local == 'ramal':
 
                     if row['type'] == 'P':
@@ -59,10 +66,10 @@ def buscar(local, input_value_search, text_area):
                     else:
                         nome_pub = f'nome simplificado (aparece só na lista publica/externa): {nome_publico} \n'
 
-                    ramais_info += f"ID: {row['id']} \nnome: {row['nome']} \n{nome_pub} Ramal: {row['ramal']:.0f} \n  Responsável: {row['responsavel']} \n {gdsu} \n  Tipo: {type} \n  Incluir: {status_ramal} \n  Ultima atualização: {row['ultima atualização']} \n    {row['ultima modificação']} \n"
+                    ramais_info += f"ID: {row['id']} \nnome: {nome_ramal} \n{nome_pub} Ramal: {row['ramal']:.0f} \n  Responsável: {row['responsavel']} \n {gdsu} \n  Tipo: {type} \n  Incluir: {status_ramal} \n  Ultima atualização: {row['ultima atualização']} \n    {row['ultima modificação']} \n"
 
                 else:
-                    ramais_info += f"ID: {row['id']},nome: {row['nome']}, Ramal: {row['ramal']:.0f}, Status: {status_ramal}\n"
+                    ramais_info += f"ID: {row['id']},nome: {nome_ramal}, Ramal: {row['ramal']:.0f}, Status: {status_ramal}\n"
 
             text_area.setText(ramais_info)
         else:
