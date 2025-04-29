@@ -2,21 +2,21 @@ from imports import *
 
 def show_option_pesquisa(opcaoPainel, p_d_pesquisa_widget, p_d_editar_widget, p_d_conversao_widget):
     opcaoPainel.setText(f"Modo: Pesquisa")
-    p_d_pesquisa_widget.setVisible(True)  # Torna o widget de pesquisa visível
-    p_d_editar_widget.setVisible(False)  # Torna o widget de editar invisível
-    p_d_conversao_widget.setVisible(False)  # Torna o widget de conversão invisível
+    p_d_pesquisa_widget.setVisible(True)  # Set visible to Widget
+    p_d_editar_widget.setVisible(False)  # Set invisible to Widget
+    p_d_conversao_widget.setVisible(False)  # Set invisible to Widget
 
 def show_option_editar(opcaoPainel, p_d_pesquisa_widget, p_d_editar_widget, p_d_conversao_widget):
     opcaoPainel.setText(f"Modo: Editar")
-    p_d_pesquisa_widget.setVisible(False)  # Torna o widget de pesquisa invisível
-    p_d_editar_widget.setVisible(True)  # Torna o widget de editar visível
-    p_d_conversao_widget.setVisible(False)  # Torna o widget de conversão invisível
+    p_d_pesquisa_widget.setVisible(False)  # Set invisible to Widget
+    p_d_editar_widget.setVisible(True)  # Set visible to Widget
+    p_d_conversao_widget.setVisible(False)  # Set invisible to Widget
 
 def show_option_converter(opcaoPainel, p_d_pesquisa_widget, p_d_editar_widget, p_d_conversao_widget):
     opcaoPainel.setText(f"Modo: Converter")
-    p_d_pesquisa_widget.setVisible(False)  # Torna o widget de pesquisa invisível
-    p_d_editar_widget.setVisible(False)  # Torna o widget de editar invisível
-    p_d_conversao_widget.setVisible(True)  # Torna o widget de conversão visível
+    p_d_pesquisa_widget.setVisible(False)  # Set invisible to Widget
+    p_d_editar_widget.setVisible(False)  # Set invisible to Widget
+    p_d_conversao_widget.setVisible(True)  # Set visible to Widget
 
 def atualiza_tabela(table):
 
