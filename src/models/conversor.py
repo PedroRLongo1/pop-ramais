@@ -205,6 +205,6 @@ def converter_lis_pesquisa():
     
     return html_lis_output
 
-def converter(label_converter):
+def converter(label_convert):
     output_cnv_html = f'{converter_lis_pub()}{converter_lis_organograma()}{converter_lis_pesquisa()}'
-    label_converter.setText(output_cnv_html)
+    label_convert.setText(output_cnv_html)

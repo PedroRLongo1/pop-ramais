@@ -1,15 +1,15 @@
 from imports import *
 
-def buscar(local, input_value_search, text_area):
+def buscar(local, input_valueSearch, label_SearchTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")
     db = pd.read_excel(xls, sheet_name=xls.sheet_names[0])
 
     try:
 # If the local of search is 'id' ou 'ramal', change the type of the value to integer, if not, set string on the type of value.
         if local == 'id' or local == 'ramal':
-            busca = int(input_value_search.text())
+            busca = int(input_valueSearch.text())
         else:
-            busca = input_value_search.text()
+            busca = input_valueSearch.text()
 
         pesquisa = db.loc[db[local] == busca]
 
@@ -74,34 +74,34 @@ def buscar(local, input_value_search, text_area):
                 else:
                     ramais_info += f"ID: {row['id']},nome: {nome_ramal}, Ramal: {row['ramal']:.0f}, Status: {status_ramal}\n"
 #show the message
-            text_area.setText(ramais_info)
+            label_SearchTextArea.setText(ramais_info)
         else:
-            text_area.setText("Nenhum ramal encontrado.")
+            label_SearchTextArea.setText("Nenhum ramal encontrado.")
     except:
-        text_area.setText("Erro ao validar os dados")
+        label_SearchTextArea.setText("Erro ao validar os dados")
 
-def editar(collumn, id, value, input_value_edit, label_avisos_editar):
+def editar(collumn, id, value, input_valueEdit, label_EditTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")
     db = pd.read_excel(xls, sheet_name=xls.sheet_names[0])
 
     try:
 # If the local of search is 'id' ou 'ramal', change the type of the value to integer, if not, set string on the type of value.
         if collumn == 'ramal':
-            value = int(input_value_edit.text())
+            value = int(input_valueEdit.text())
         else:
-            value = input_value_edit.text()
-        label_avisos_editar.setText(f"Na coluna {collumn}, linha {id}, o valor foi alterado para {value}")
+            value = input_valueEdit.text()
+        label_EditTextArea.setText(f"Na coluna {collumn}, linha {id}, o valor foi alterado para {value}")
         db.loc[db['id'] == id, collumn] = value #set the new value
     except:
-        label_avisos_editar.setText("insira um valor válido (Um numero de 4 digitos inteiro)")
+        label_EditTextArea.setText("insira um valor válido (Um numero de 4 digitos inteiro)")
     
     db.to_excel('src/Ramais.xlsx', index=False) # Save the changes
 
-def dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, new_nome_pub, new_type, new_upd_date, new_upd_mod, label_avisos_editar):
+def dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, new_nome_pub, new_type, new_upd_date, new_upd_mod, label_EditTextArea):
     try:
         ramal = int(new_ramal)
     except:
-        label_avisos_editar.setText(f"Erro: insira um ramal") #check if there is a ramal, becouse if only mandatory value
+        label_EditTextArea.setText(f"Erro: insira um ramal") #check if there is a ramal, becouse if only mandatory value
 
     if new_name == '':
         name = 'Sem nome'
@@ -188,7 +188,7 @@ def dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new
 #return the object
     return ramal_novo
 
-def adicionar(new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, new_nome_pub, new_type, new_upd_date, new_upd_mod, label_avisos_editar):
+def adicionar(new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, new_nome_pub, new_type, new_upd_date, new_upd_mod, label_EditTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")
     db = pd.read_excel(xls, sheet_name=xls.sheet_names[0])
 #create a new id
@@ -197,7 +197,7 @@ def adicionar(new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s,
 
     if db is not None:
         #create the object 'ramal novo' with the funciton 'dados_adc', that return the object 'ramal_novo'
-        ramal_novo = dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, new_nome_pub, new_type, new_upd_date, new_upd_mod, label_avisos_editar)
+        ramal_novo = dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, new_nome_pub, new_type, new_upd_date, new_upd_mod, label_EditTextArea)
         #Concatenating the DBs
         db = pd.concat([db, ramal_novo], ignore_index=True)
         
@@ -210,9 +210,9 @@ def adicionar(new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s,
     except:
         response = 'Erro: não foi possível salvar'
     
-    label_avisos_editar.setText(response)
+    label_EditTextArea.setText(response)
 
-def deletar(id, label_avisos_editar):
+def deletar(id, label_EditTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")
     db = pd.read_excel(xls, sheet_name=xls.sheet_names[0])
 
@@ -222,7 +222,7 @@ def deletar(id, label_avisos_editar):
         db = db.drop(index=index)
         db = db.reset_index(drop=True) #reseta todos os IDs
         db['id'] = db.index + 1 #gera todos os IDs novamente de modo procedural
-        label_avisos_editar.setText(f"o Ramal foi Deletado")
+        label_EditTextArea.setText(f"o Ramal foi Deletado")
         db.to_excel('src/Ramais.xlsx', index=False)
     except:
-        label_avisos_editar.setText('Erro, id inexistente')
+        label_EditTextArea.setText('Erro, id inexistente')

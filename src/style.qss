@@ -1,6 +1,18 @@
 Project{
     background-color: #0F3B3B;
 }
+/* buttons */
+#buttonSearch {
+    background-color: #52DADA;
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#buttonSearch:hover {
+    background-color: lightgoldenrodyellow;
+    color: #000000;
+}
+
 #buttonEdit {
     width: 10px;
     background-color: #52DADA;
@@ -8,7 +20,6 @@ Project{
     border: 1px solid black;
     border-radius: 5px;
 }
-
 #buttonEdit:hover {
     background-color: lightgoldenrodyellow;
     color: #000000;
@@ -21,74 +32,69 @@ Project{
     border: 1px solid black;
     border-radius: 5px;
 }
-
 #buttonConvert:hover {
     background-color: lightgoldenrodyellow;
     color: #000000;
 }
 
-#buttonPesquisa {
-    background-color: #52DADA;
-    color: #000000;
+#buttonEditValues {
+    background-color: #0B5B5B;
+    color: white;
     border: 1px solid black;
     border-radius: 5px;
 }
+#buttonEditValues:hover {
+    background-color: #52DADA;
+    color: black;
+}
 
-#buttonPesquisa:hover {
-    background-color: lightgoldenrodyellow;
-    color: #000000;
+#buttonConvertHTML {
+    background-color: #52DADA;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
 }
-#tela {
+#buttonConvertHTML:hover {
+    background-color: #00FF00;
+    color: black;
+}
+#buttonCopyHTML {
+    background-color: #52DADA;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#buttonCopyHTML:hover {
+    background-color: #00FF00;
+    color: black;
+}
+/* inputs */
+#inputEditValues {
+        background-color: #0B5B5B;
+        color: white;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+#inputEditValues:hover {
     background-color: #007A7A;
-    color:white ;
 }
-#opcaoPainel {
+/* labels */
+#labelSearchTextArea {
+    background-color: #124646;
+    color: white;
+}
+#labelEditTextArea {
+    color: white;
+}
+#labelConvertTextArea {
+    background-color: #124646;
+    color: white;
+}
+#labelPanelOption {
     background-color: #52DADA;
     color:black;
 }
-#painelDown {
-    width: 100px; height: 100px;
-    background-color: white;
-}
-#painel_baixo {
-    color: white;
-    background-color: #007A7A;
-}
-#search {
-    background-color: #007A7A;
-    height: 100;
-}
-#edit {
-    color: white;
-    background-color: #007A7A;
-}
-#painel {
-    background-color: #0B5B5B;
-}
-#widget {
-    background-color: #0B5B5B;
-}
-
-#input_pd {
-    background-color: #0B5B5B;
-    color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#input_pd:hover {
-    background-color: #007A7A;
-}
-
-#button_search {
-    background-color: #0B5B5B;
-    color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#button_search:hover {
-    background-color: #007A7A;
-    color: black;
-}
+/* table */
 #table {
     background-color: #52DADA;
     border: 1px solid black;
@@ -104,88 +110,35 @@ Project{
     color: black;
     font-weight: 100;
 }
-#painelDown {
+/* Widgets */
+#widgetpanelUp {
     background-color: #007A7A;
 }
-#text_area {
+#widgetPanelDown {
+    width: 100px; height: 100px;
+    background-color: #007A7A;
+}
+#widgetPanel {
     background-color: #0F3B3B;
-    color: white;
 }
-#label_avisos {
-    color: white;
-}
-#button_convert {
-    background-color: #52DADA;
-    color: black;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#button_convert:hover {
-    background-color: #00FF00;
-    color: black;
-}
-#button_copy_html {
-    background-color: #52DADA;
-    color: black;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#button_copy_html:hover {
-    background-color: #00FF00;
-    color: black;
-}
-#label_convert {
-    background-color: #124646;
-    color: white;
-}
-
-#input_add {
+/* bases */
+#buttonBase {
     background-color: #0B5B5B;
     color: white;
     border: 1px solid black;
     border-radius: 5px;
 }
-#input_add:hover {
+#buttonBase:hover {
     background-color: #007A7A;
-}
-#button_edit {
-    background-color: #0B5B5B;
-    color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#button_edit:hover {
-    background-color: #52DADA;
     color: black;
-}
 
-#button_add {
+}
+#inputBase {
     background-color: #0B5B5B;
     color: white;
     border: 1px solid black;
     border-radius: 5px;
 }
-#button_add:hover {
-    background-color: #52DADA;
-    color: black;
-}
-
-#input_del {
-    background-color: #0B5B5B;
-    color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#input_del:hover {
+#inputBase:hover {
     background-color: #007A7A;
-}
-#button_del {
-    background-color: #0B5B5B;
-    color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#button_del:hover {
-    background-color: #52DADA;
-    color: black;
 }
