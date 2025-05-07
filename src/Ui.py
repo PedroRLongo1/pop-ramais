@@ -29,7 +29,7 @@ class Project(QWidget):
         self.widget_panelUp.setLayout(self.layout_panelUp)
 #       ]
 #       settings of buttons that change the screen [
-        self.button_Pesquisa = QPushButton("pesquisar")
+        self.button_Pesquisa = QPushButton("Buscar")
         self.button_Pesquisa.setObjectName("buttonSearch")
         self.button_Pesquisa.clicked.connect(self.show_pesquisa)
 

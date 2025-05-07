@@ -1,19 +1,19 @@
 from imports import *
 
 def show_option_pesquisa(opcao_panel, widget_panelDownSearch, widget_panelDownEdit, widget_panelDownConvert):
-    opcao_panel.setText(f"Modo: Pesquisa")
+    opcao_panel.setText(f"Modo: Busca")
     widget_panelDownSearch.setVisible(True)  # Set visible to Widget
     widget_panelDownEdit.setVisible(False)  # Set invisible to Widget
     widget_panelDownConvert.setVisible(False)  # Set invisible to Widget
 
 def show_option_editar(opcao_panel, widget_panelDownSearch, widget_panelDownEdit, widget_panelDownConvert):
-    opcao_panel.setText(f"Modo: Pesquisa")
+    opcao_panel.setText(f"Modo: Edição")
     widget_panelDownSearch.setVisible(False)   # Set invisible to Widget
     widget_panelDownEdit.setVisible(True)  #Set visible to Widget
     widget_panelDownConvert.setVisible(False)  # Set invisible to Widget
 
 def show_option_converter(opcaoPainel, p_d_pesquisa_widget, p_d_editar_widget, p_d_conversao_widget):
-    opcaoPainel.setText(f"Modo: Pesquisa")
+    opcaoPainel.setText(f"Modo: Conversão")
     p_d_pesquisa_widget.setVisible(False)  # Set invisible to Widget
     p_d_editar_widget.setVisible(False)  #Set invisible to Widget
     p_d_conversao_widget.setVisible(True)# Set visible to Widget
