@@ -1,4 +1,5 @@
-from imports import *
+import pandas as pd
+from imports_pyside import *
 
 def copy_html(label_converter):
     # Obter o texto do QLabel

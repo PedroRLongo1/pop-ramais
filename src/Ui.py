@@ -1,4 +1,5 @@
-from imports import *
+from imports_pyside import *
+import pandas as pd
 
 xls = pd.ExcelFile("src/Ramais.xlsx")
 db = pd.read_excel(xls, sheet_name=xls.sheet_names[0])

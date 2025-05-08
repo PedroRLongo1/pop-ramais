@@ -1,4 +1,5 @@
-from imports import *
+from imports_pyside import *
+import pandas as pd
 
 def show_option_pesquisa(opcao_panel, widget_panelDownSearch, widget_panelDownEdit, widget_panelDownConvert):
     opcao_panel.setText(f"Modo: Busca")

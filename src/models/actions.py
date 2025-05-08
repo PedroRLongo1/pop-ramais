@@ -1,4 +1,4 @@
-from imports import *
+import pandas as pd
 
 def buscar(local, input_valueSearch, label_SearchTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")
@@ -93,7 +93,7 @@ def editar(collumn, id, value, input_valueEdit, label_EditTextArea):
         label_EditTextArea.setText(f"Na coluna {collumn}, linha {id}, o valor foi alterado para {value}")
         db.loc[db['id'] == id, collumn] = value #set the new value
     except:
-        label_EditTextArea.setText("insira um valor válido (Um numero de 4 digitos inteiro)")
+        label_EditTextArea.setText("insira um valor válido (Um número de 4 dígitos inteiro)")
     
     db.to_excel('src/Ramais.xlsx', index=False) # Save the changes
 
@@ -222,7 +222,7 @@ def deletar(id, label_EditTextArea):
         db = db.drop(index=index)
         db = db.reset_index(drop=True) #reseta todos os IDs
         db['id'] = db.index + 1 #gera todos os IDs novamente de modo procedural
-        label_EditTextArea.setText(f"o Ramal foi Deletado")
+        label_EditTextArea.setText(f"o Ramal foi deletado")
         db.to_excel('src/Ramais.xlsx', index=False)
     except:
-        label_EditTextArea.setText('Erro, id inexistente')
+        label_EditTextArea.setText('Erro: id inexistente')
