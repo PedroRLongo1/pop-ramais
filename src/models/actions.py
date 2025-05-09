@@ -1,4 +1,4 @@
-import pandas as pd
+from imports import pd
 
 def buscar(local, input_valueSearch, label_SearchTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")

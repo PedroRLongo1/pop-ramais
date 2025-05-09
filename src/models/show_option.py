@@ -1,4 +1,4 @@
-from imports_pyside import *
+from imports import QTableWidget, QTableWidgetItem
 import pandas as pd
 
 def show_option_pesquisa(opcao_panel, widget_panelDownSearch, widget_panelDownEdit, widget_panelDownConvert):
