@@ -1,22 +1,31 @@
 from imports import pd
+import unicodedata
+
+def normalizar(texto):
+    if pd.isna(texto):
+        return ''
+    return unicodedata.normalize('NFKD', str(texto)).encode('ASCII', 'ignore').decode('utf-8').lower()
 
 def buscar(local, input_valueSearch, label_SearchTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")
     db = pd.read_excel(xls, sheet_name=xls.sheet_names[0])
 
     try:
-# If the local of search is 'id' ou 'ramal', change the type of the value to integer, if not, set string on the type of value.
         if local == 'id' or local == 'ramal':
             busca = int(input_valueSearch.text())
+            pesquisa = db.loc[db[local] == busca]
         else:
-            busca = input_valueSearch.text()
+            busca = normalizar(input_valueSearch.text())
 
-        pesquisa = db.loc[db[local] == busca]
+            # Normaliza a coluna selecionada
+            coluna_normalizada = db[local].apply(normalizar)
+
+            # Busca parcial usando str.contains
+            pesquisa = db.loc[coluna_normalizada.str.contains(busca, na=False)]
 
         if not pesquisa.empty:
             ramais_info = ""
             for index, row in pesquisa.iterrows():
-# Config some values to the user know what means
                 if row['lista privada'] == 's' and row['lista pub'] == 's':
                     status_ramal = 'interno e externo'
                 elif row['lista privada'] == 's' and row['lista pub'] == 'n':
@@ -32,9 +41,8 @@ def buscar(local, input_valueSearch, label_SearchTextArea):
                     nome_ramal = f"FILA - {row['nome']}"
                 else:
                     nome_ramal = 'erro no nome ou tipo do ramal'
-# If the local is 'id' or 'ramal', return only one response, but, with all informations, if not, return many responses, but, with a little information
+
                 if local == 'id' or local == 'ramal':
-#Config the informations to return to User
                     if row['type'] == 'P':
                         type = 'Principal'
                     elif row['type'] == 'F':
@@ -42,43 +50,29 @@ def buscar(local, input_valueSearch, label_SearchTextArea):
                     else:
                         type = 'Erro'
 
-                    if row['lista privada'] == 's' and row['lista pub'] == 's':
-                        status_ramal = 'interno e externo'
-                    elif row['lista privada'] == 's' and row['lista pub'] == 'n':
-                        status_ramal = 'interno'
-                    elif row['lista privada'] == 'n' and row['lista pub'] == 's':
-                        status_ramal = 'externo'
-                    else:
-                        status_ramal = 'não exibir'
-
-                    if row['Divisao'] == "":
-                        divisao = ""
-                    else:
-                        divisao = row['Divisao']
-
-                    if row['Setor'] =="":
-                        setor = ""
-                    else:
-                        setor = row['Setor']
+                    divisao = row['Divisao'] if row['Divisao'] else ""
+                    setor = row['Setor'] if row['Setor'] else ""
 
                     gdsu = f"  ->{row['Gerencia']}\n      ->{divisao}\n       ->{setor}\n        ->{row['Unidade']} "
 
-                    nome_publico = row['nome_pub']
-                    if row['nome_pub'] is None:
-                        nome_pub = ""
-                    else:
-                        nome_pub = f'nome simplificado (aparece só na lista publica/externa): {nome_publico} \n'
-#pull the informations of the ramal in a formated message
-                    ramais_info += f"ID: {row['id']} \nnome: {nome_ramal} \n{nome_pub} Ramal: {row['ramal']:.0f} \n  Responsável: {row['responsavel']} \n {gdsu} \n  Tipo: {type} \n  Incluir: {status_ramal} \n  Ultima atualização: {row['ultima atualização']} \n    {row['ultima modificação']} \n"
-#pull the informations of the ramals in a formated message
+                    nome_publico = row['nome_pub'] if row['nome_pub'] else ""
+                    nome_pub = f'nome simplificado (aparece só na lista publica/externa): {nome_publico} \n' if nome_publico else ""
+
+                    ramais_info += (
+                        f"ID: {row['id']} \nnome: {nome_ramal} \n{nome_pub}Ramal: {row['ramal']:.0f} \n"
+                        f"  Responsável: {row['responsavel']} \n{gdsu} \n  Tipo: {type} \n  Incluir: {status_ramal} \n"
+                        f"  Ultima atualização: {row['ultima atualização']} \n    {row['ultima modificação']} \n"
+                    )
                 else:
-                    ramais_info += f"ID: {row['id']},nome: {nome_ramal}, Ramal: {row['ramal']:.0f}, Status: {status_ramal}\n"
-#show the message
+                    ramais_info += f"ID: {row['id']}, nome: {nome_ramal}, Ramal: {row['ramal']:.0f}, Status: {status_ramal}\n"
+
             label_SearchTextArea.setText(ramais_info)
         else:
             label_SearchTextArea.setText("Nenhum ramal encontrado.")
+
     except:
-        label_SearchTextArea.setText("Erro ao validar os dados")
+        label_SearchTextArea.setText(f"Erro ao validar os dados")
+
 
 def editar(collumn, id, value, input_valueEdit, label_EditTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")

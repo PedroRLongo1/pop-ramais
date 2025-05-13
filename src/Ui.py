@@ -72,12 +72,21 @@ class Project(QWidget):
         self.widget_panelDownSearch.setLayout(self.layout_panelDownSearch)
 #         >
 #         panel_down(mode: edit) Widgets <
+        self.title_searchMode = QLabel("Busca por ramais")
+        self.title_searchMode.setObjectName("title_modes")
+        self.title_searchMode.setAlignment(Qt.AlignCenter)
+
         self.input_comboboxLocal = QComboBox()
         self.input_comboboxLocal.setObjectName("inputBase")
+
+        self.subtitle_searchSelector = QLabel("Filtro da pesquisa")
+        self.subtitle_searchSelector.setObjectName("subtitle_modes")
 
         collumns_display_pesquisa = ['id', 'ramal', 'nome', 'responsavel', 'Gerencia', 'Divisao', 'Setor', 'Unidade', 'lista privada', 'lista pub', 'type', 'local pub', 'nome_pub', 'ultima atualização', 'ultima modificação']
         self.input_comboboxLocal.addItems(collumns_display_pesquisa)
         
+        self.subtitle_searchInput = QLabel("Valor da pesquisa")
+        self.subtitle_searchInput.setObjectName("subtitle_modes")
         self.input_valueSearch = QLineEdit(placeholderText="O que será procurado?")
         self.input_valueSearch.setObjectName("inputBase")
         self.button_Search = QPushButton("Buscar")
@@ -94,7 +103,10 @@ class Project(QWidget):
 
         self.layout_panelDownSearch.addWidget(self.scroll_area)
 
+        self.layout_panelDownSearch.addWidget(self.title_searchMode)
+        self.layout_panelDownSearch.addWidget(self.subtitle_searchSelector)
         self.layout_panelDownSearch.addWidget(self.input_comboboxLocal)
+        self.layout_panelDownSearch.addWidget(self.subtitle_searchInput)
         self.layout_panelDownSearch.addWidget(self.input_valueSearch)
         self.layout_panelDownSearch.addWidget(self.button_Search)
         self.layout_panelDownSearch.addWidget(self.scroll_area)
@@ -108,14 +120,23 @@ class Project(QWidget):
         self.widget_panelDownEdit.setLayout(self.layout_panelDownEdit)
 #         >
 #         Widgets of first_part<
+        self.title_editMode = QLabel("Painel de edição")
+        self.title_editMode.setObjectName("title_modes")
+
+        self.subtitle_EditSelector = QLabel("Filtro da edição")
+        self.subtitle_EditSelector.setObjectName("subtitle_modes")
         self.input_comboboxCollumn = QComboBox()
         self.input_comboboxCollumn.setObjectName("inputEditValues")
 
         col_disp_editar = ['ramal', 'nome', 'responsavel', 'Gerencia', 'Divisao', 'Setor', 'Unidade', 'lista privada', 'lista pub', 'type', 'local pub', 'nome_pub', 'ultima atualização', 'ultima modificação']  # Colunas que o usuário pode escolher
         self.input_comboboxCollumn.addItems(col_disp_editar)
 
+        self.subtitle_editInputId = QLabel("ID do ramal a ser editada")
+        self.subtitle_editInputId.setObjectName("subtitle_modes")
         self.input_rowEdit = QLineEdit(placeholderText="qual o id do item?")
         self.input_rowEdit.setObjectName("inputEditValues")
+        self.subtitle_editInputValue = QLabel("Qual o novo valor?")
+        self.subtitle_editInputValue.setObjectName("subtitle_modes")
         self.input_valueEdit = QLineEdit(placeholderText="qual o valor a ser substituido?")
         self.input_valueEdit.setObjectName("inputEditValues")
         self.button_buscarEdit = QPushButton("atualizar")
@@ -126,8 +147,12 @@ class Project(QWidget):
         self.label_EditTextArea.setObjectName("labelEditTextArea")
 #         >
 #         add this Widgets to first_part<
+        self.layout_panelDownEdit.addWidget(self.title_editMode)
+        self.layout_panelDownEdit.addWidget(self.subtitle_EditSelector)
         self.layout_panelDownEdit.addWidget(self.input_comboboxCollumn)
+        self.layout_panelDownEdit.addWidget(self.subtitle_editInputId)
         self.layout_panelDownEdit.addWidget(self.input_rowEdit)
+        self.layout_panelDownEdit.addWidget(self.subtitle_editInputValue)
         self.layout_panelDownEdit.addWidget(self.input_valueEdit)
         self.layout_panelDownEdit.addWidget(self.button_buscarEdit)
 #         >
@@ -139,6 +164,9 @@ class Project(QWidget):
         self.widget_panelDownAdd.setLayout(self.layout_panelDownAdd)
 #         >
 #         Widgets of second_part <
+        self.title_addMode = QLabel("Painel de adição de ramais")
+        self.title_addMode.setObjectName("title_modes")
+
         self.input_newRamal = QLineEdit(placeholderText="Ramal?")
         self.input_newRamal.setObjectName("inputEditValues")
         self.input_newNome = QLineEdit(placeholderText="Nome?")
@@ -167,11 +195,12 @@ class Project(QWidget):
         self.input_newUpdateDate.setObjectName("inputEditValues")
         self.input_newUpdateMod = QLineEdit("Alteração: Incluso na lista")
         self.input_newUpdateMod.setObjectName("inputEditValues")
-        self.button_addNewRamal = QPushButton("adicionar")
+        self.button_addNewRamal = QPushButton("Criar Ramal")
         self.button_addNewRamal.setObjectName("buttonEditValues")
         self.button_addNewRamal.clicked.connect(self.call_add)
 #         >
 #         add this Widgets to second_part <
+        self.layout_panelDownAdd.addWidget(self.title_addMode)
         self.layout_panelDownAdd.addWidget(self.input_newRamal)
         self.layout_panelDownAdd.addWidget(self.input_newNome)
         self.layout_panelDownAdd.addWidget(self.input_newResp)
@@ -196,6 +225,9 @@ class Project(QWidget):
         self.widget_panelDownDelete.setLayout(self.layout_panelDownDelete)
 #         >
 #         Widgets of third part <
+        self.title_deleteMode = QLabel("Painel de remoção de ramais")
+        self.title_deleteMode.setObjectName("title_modes")
+
         self.input_idDelete = QLineEdit(placeholderText="qual o id do item?")
         self.input_idDelete.setObjectName("inputEditValues")
         self.button_delete = QPushButton("deletar")
@@ -203,6 +235,7 @@ class Project(QWidget):
         self.button_delete.clicked.connect(self.call_del)
 #         >
 #         add this Widgets to tird_part <
+        self.layout_panelDownDelete.addWidget(self.title_deleteMode)
         self.layout_panelDownDelete.addWidget(self.input_idDelete)
         self.layout_panelDownDelete.addWidget(self.button_delete)
 #         >

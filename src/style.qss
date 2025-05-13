@@ -80,15 +80,17 @@ Project{
 }
 /* labels */
 #labelSearchTextArea {
-    background-color: #124646;
+    background-color: #0F3B3B;
     color: white;
+    border: 1px solid white;
 }
 #labelEditTextArea {
     color: white;
 }
 #labelConvertTextArea {
-    background-color: #124646;
+    background-color: #0F3B3B;
     color: white;
+    border: 1px solid white;
 }
 #labelPanelOption {
     background-color: #52DADA;
@@ -119,7 +121,7 @@ Project{
     background-color: #007A7A;
 }
 #widgetPanel {
-    background-color: #0F3B3B;
+    background-color: #124646;
 }
 /* bases */
 #buttonBase {
@@ -131,7 +133,6 @@ Project{
 #buttonBase:hover {
     background-color: #007A7A;
     color: black;
-
 }
 #inputBase {
     background-color: #0B5B5B;
@@ -141,4 +142,13 @@ Project{
 }
 #inputBase:hover {
     background-color: #007A7A;
+}
+#title_modes{
+    background-color: transparent;
+    color: white;
+    font-size: 20px
+}
+#subtitle_modes{
+    background-color: transparent;
+    color: white;
 }

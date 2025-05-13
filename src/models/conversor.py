@@ -53,8 +53,8 @@ def converter_lis_pub():
             grouped_data[local_pub].append(ramal_f)
 #Starts the creation of HTML with the header
     html_output = "<div style=\"text-align: center; \"><div class=\"d-flex flex-column justify-content-center align-items-center\"><table><tbody><tr><td colspan=\"2\">" \
-                  "<p> </p><p class=\"text-center\" style=\"text-align: center; \"><strong>TELEFONES ÚTEIS</strong></p><p class=\"text-center\" style=\"text-align: center; \">" \
-                  "<strong>HOSPITAL UNIVERSITÁRIO DA GRANDE DOURADOS<br /></strong></p><p> </p></td></tr><tr><td colspan=\"2\"><p> </p><p class=\"text-center\"><strong>" \
+                  "<p class=\"text-center\" style=\"text-align: center; \"><strong>TELEFONES ÚTEIS</strong></p><p class=\"text-center\" style=\"text-align: center; \">" \
+                  "<strong>HOSPITAL UNIVERSITÁRIO DA GRANDE DOURADOS<br /></strong> </p></td></tr><tr><td colspan=\"2\"><p> </p><p class=\"text-center\"><strong>" \
                   "​</strong></p></td></tr><div class=\"d-flex flex-column justify-content-center align-items-center\">"
 
     for local_pub, ramais in grouped_data.items():
@@ -68,7 +68,6 @@ def converter_lis_pub():
 
     html_pub_output = html_output
     return html_pub_output
-
 
 def converter_lis_organograma():
     xls = pd.ExcelFile("src/Ramais.xlsx")
