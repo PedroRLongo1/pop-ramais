@@ -15,7 +15,7 @@ class Project(QWidget):
 #Create Layout main (
     def init_ui(self):
         self.setWindowTitle('Gerenciador de ramais')
-        self.setGeometry(0, 0, 1800, 1000)
+        self.setGeometry(0, 0, 1400, 1000)
 
         self.splitter = QSplitter(Qt.Horizontal)
 
@@ -95,6 +95,24 @@ class Project(QWidget):
 
         self.label_SearchTextArea = QLabel("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
         self.label_SearchTextArea.setObjectName("labelSearchTextArea")
+
+        self.layout_searchSelector = QHBoxLayout()
+        self.layout_searchinput = QHBoxLayout()
+
+        self.layout_searchSelector.addWidget(self.subtitle_searchSelector)
+        self.layout_searchSelector.addWidget(self.input_comboboxLocal)
+        self.subtitle_searchSelector.setMaximumWidth(150)
+        self.input_comboboxLocal.setMaximumWidth(260)
+
+        self.layout_searchinput.addWidget(self.subtitle_searchInput)
+        self.layout_searchinput.addWidget(self.input_valueSearch)
+        self.subtitle_searchInput.setMaximumWidth(150)
+        self.input_valueSearch.setMaximumWidth(260)
+
+        
+        self.button_Search.setMaximumSize(400, 35)
+        self.button_Search.setMinimumSize(100, 25)
+
 #         >
 #         add this Widgets to panel_down <
         self.scroll_area = QScrollArea()
@@ -104,24 +122,31 @@ class Project(QWidget):
         self.layout_panelDownSearch.addWidget(self.scroll_area)
 
         self.layout_panelDownSearch.addWidget(self.title_searchMode)
-        self.layout_panelDownSearch.addWidget(self.subtitle_searchSelector)
-        self.layout_panelDownSearch.addWidget(self.input_comboboxLocal)
-        self.layout_panelDownSearch.addWidget(self.subtitle_searchInput)
-        self.layout_panelDownSearch.addWidget(self.input_valueSearch)
-        self.layout_panelDownSearch.addWidget(self.button_Search)
+        self.layout_panelDownSearch.addLayout(self.layout_searchSelector)
+        self.layout_panelDownSearch.addLayout(self.layout_searchinput)
+        self.layout_panelDownSearch.addWidget(self.button_Search, alignment=Qt.AlignCenter)
         self.layout_panelDownSearch.addWidget(self.scroll_area)
 #         >
+#       ]
+#       panel_down [
+#         general settings <
+        self.layout_panelDown = QVBoxLayout()
+        self.widget_panelDown = QWidget()
+        self.widget_panelDown.setObjectName("widgetPanelDown")
+        self.widget_panelDown.setLayout(self.layout_panelDown)
+# >
 #       ]
 #       panel_down(mode: edit) first_part: edit values [
 #         general settings <
         self.layout_panelDownEdit = QVBoxLayout()
         self.widget_panelDownEdit = QWidget()
-        self.widget_panelDownEdit.setObjectName("widgetPanelDownEditar")
+        self.widget_panelDownEdit.setObjectName("widgetPanelDownSubDiv")
         self.widget_panelDownEdit.setLayout(self.layout_panelDownEdit)
 #         >
 #         Widgets of first_part<
         self.title_editMode = QLabel("Painel de edição")
         self.title_editMode.setObjectName("title_modes")
+        self.title_editMode.setAlignment(Qt.AlignCenter)
 
         self.subtitle_EditSelector = QLabel("Filtro da edição")
         self.subtitle_EditSelector.setObjectName("subtitle_modes")
@@ -131,102 +156,244 @@ class Project(QWidget):
         col_disp_editar = ['ramal', 'nome', 'responsavel', 'Gerencia', 'Divisao', 'Setor', 'Unidade', 'lista privada', 'lista pub', 'type', 'local pub', 'nome_pub', 'ultima atualização', 'ultima modificação']  # Colunas que o usuário pode escolher
         self.input_comboboxCollumn.addItems(col_disp_editar)
 
-        self.subtitle_editInputId = QLabel("ID do ramal a ser editada")
-        self.subtitle_editInputId.setObjectName("subtitle_modes")
-        self.input_rowEdit = QLineEdit(placeholderText="qual o id do item?")
-        self.input_rowEdit.setObjectName("inputEditValues")
+        self.subtitle_editInputId = QLabel("ID do ramal a ser editado")
+        self.input_rowEdit = QLineEdit()
         self.subtitle_editInputValue = QLabel("Qual o novo valor?")
-        self.subtitle_editInputValue.setObjectName("subtitle_modes")
-        self.input_valueEdit = QLineEdit(placeholderText="qual o valor a ser substituido?")
-        self.input_valueEdit.setObjectName("inputEditValues")
+        self.input_valueEdit = QLineEdit()
         self.button_buscarEdit = QPushButton("atualizar")
+
+        self.subtitle_editInputId.setObjectName("subtitle_modes")
+        self.input_rowEdit.setObjectName("inputEditValues")
+        self.subtitle_editInputValue.setObjectName("subtitle_modes")
+        self.input_valueEdit.setObjectName("inputEditValues")
         self.button_buscarEdit.setObjectName("buttonEditValues")
+
         self.button_buscarEdit.clicked.connect(self.call_editar)
+        self.button_buscarEdit.setMaximumSize(150, 30)
+        self.button_buscarEdit.setMinimumSize(100, 25)
 
         self.label_EditTextArea = QLabel("")
         self.label_EditTextArea.setObjectName("labelEditTextArea")
 #         >
 #         add this Widgets to first_part<
         self.layout_panelDownEdit.addWidget(self.title_editMode)
-        self.layout_panelDownEdit.addWidget(self.subtitle_EditSelector)
-        self.layout_panelDownEdit.addWidget(self.input_comboboxCollumn)
-        self.layout_panelDownEdit.addWidget(self.subtitle_editInputId)
-        self.layout_panelDownEdit.addWidget(self.input_rowEdit)
-        self.layout_panelDownEdit.addWidget(self.subtitle_editInputValue)
-        self.layout_panelDownEdit.addWidget(self.input_valueEdit)
-        self.layout_panelDownEdit.addWidget(self.button_buscarEdit)
+
+        self.layout_editSelector = QHBoxLayout()
+
+        self.subtitle_EditSelector.setMaximumWidth(150)
+        self.input_comboboxCollumn.setMaximumWidth(150)
+        self.layout_editSelector.addWidget(self.subtitle_EditSelector)
+        self.layout_editSelector.addWidget(self.input_comboboxCollumn)
+
+        self.layout_editInputId = QHBoxLayout()
+
+        self.subtitle_editInputId.setMaximumWidth(150)
+        self.input_rowEdit.setMaximumWidth(150)
+        self.layout_editInputId.addWidget(self.subtitle_editInputId)
+        self.layout_editInputId.addWidget(self.input_rowEdit)
+
+        self.layout_editInputValue = QHBoxLayout()
+
+        self.subtitle_editInputValue.setMaximumWidth(150)
+        self.input_valueEdit.setMaximumWidth(150)
+        self.layout_editInputValue.addWidget(self.subtitle_editInputValue)
+        self.layout_editInputValue.addWidget(self.input_valueEdit)
+
+        self.layout_panelDownEdit.addLayout(self.layout_editSelector)
+        self.layout_panelDownEdit.addLayout(self.layout_editInputId)
+        self.layout_panelDownEdit.addLayout(self.layout_editInputValue)
+
+        self.layout_panelDownEdit.addWidget(self.button_buscarEdit, alignment=Qt.AlignCenter)
 #         >
 #       ] end of first_part
 #       panel_down(mode: edit) second_part: add values [
 #         general_settings < 
         self.layout_panelDownAdd = QVBoxLayout()
         self.widget_panelDownAdd = QWidget()
+        self.widget_panelDownAdd.setObjectName('widgetPanelDownSubDiv')
         self.widget_panelDownAdd.setLayout(self.layout_panelDownAdd)
 #         >
 #         Widgets of second_part <
         self.title_addMode = QLabel("Painel de adição de ramais")
         self.title_addMode.setObjectName("title_modes")
+        self.title_addMode.setAlignment(Qt.AlignCenter)
 
-        self.input_newRamal = QLineEdit(placeholderText="Ramal?")
+        self.subtitle_addRamal = QLabel("Insira o ramal:")
+        self.subtitle_addRamal.setObjectName("subtitle_modes")
+        self.input_newRamal = QLineEdit()
         self.input_newRamal.setObjectName("inputEditValues")
-        self.input_newNome = QLineEdit(placeholderText="Nome?")
+        self.layout_addRamal = QHBoxLayout()
+        self.layout_addRamal.addWidget(self.subtitle_addRamal)
+        self.layout_addRamal.addWidget(self.input_newRamal)
+        self.subtitle_addRamal.setMaximumWidth(150)
+        self.input_newRamal.setMaximumWidth(260)
+
+        self.subtitle_addNome = QLabel("Insira o nome:")
+        self.subtitle_addNome.setObjectName("subtitle_modes")
+        self.input_newNome = QLineEdit()
         self.input_newNome.setObjectName("inputEditValues")
-        self.input_newResp = QLineEdit(placeholderText="Responsável:")
+        self.layout_addNome = QHBoxLayout()
+        self.layout_addNome.addWidget(self.subtitle_addNome)
+        self.layout_addNome.addWidget(self.input_newNome)
+        self.subtitle_addNome.setMaximumWidth(150)
+        self.input_newNome.setMaximumWidth(260)
+
+        self.subtitle_addResp = QLabel("Quem é o responsável:")
+        self.subtitle_addResp.setObjectName("subtitle_modes")
+        self.input_newResp = QLineEdit()
         self.input_newResp.setObjectName("inputEditValues")
-        self.input_newGdsuG = QLineEdit(placeholderText="Em qual gerência se localiza?")
+        self.layout_addResp = QHBoxLayout()
+        self.layout_addResp.addWidget(self.subtitle_addResp)
+        self.layout_addResp.addWidget(self.input_newResp)
+        self.subtitle_addResp.setMaximumWidth(150)
+        self.input_newResp.setMaximumWidth(260)
+
+        self.subtitle_addGdsuG = QLabel("Gerência:")
+        self.subtitle_addGdsuG.setObjectName("subtitle_modes")
+        self.input_newGdsuG = QLineEdit()
         self.input_newGdsuG.setObjectName("inputEditValues")
-        self.input_newGdsuD = QLineEdit(placeholderText="Em qual divisão se localiza?")
+        self.layout_addGdsuG = QHBoxLayout()
+        self.layout_addGdsuG.addWidget(self.subtitle_addGdsuG)
+        self.layout_addGdsuG.addWidget(self.input_newGdsuG)
+        self.subtitle_addGdsuG.setMaximumWidth(150)
+        self.input_newGdsuG.setMaximumWidth(260)
+
+        self.subtitle_addGdsuD = QLabel("Divisão:")
+        self.subtitle_addGdsuD.setObjectName("subtitle_modes")
+        self.input_newGdsuD = QLineEdit()
         self.input_newGdsuD.setObjectName("inputEditValues")
-        self.input_newGdsuS = QLineEdit(placeholderText="Em qual setor se localiza?")
+        self.layout_addGdsuD = QHBoxLayout()
+        self.layout_addGdsuD.addWidget(self.subtitle_addGdsuD)
+        self.layout_addGdsuD.addWidget(self.input_newGdsuD)
+        self.subtitle_addGdsuD.setMaximumWidth(150)
+        self.input_newGdsuD.setMaximumWidth(260)
+
+        self.subtitle_addGdsuS = QLabel("Setor:")
+        self.subtitle_addGdsuS.setObjectName("subtitle_modes")
+        self.input_newGdsuS = QLineEdit()
         self.input_newGdsuS.setObjectName("inputEditValues")
-        self.input_newGdsuU = QLineEdit(placeholderText="Em qual unidade se localiza?")
+        self.layout_addGdsuS = QHBoxLayout()
+        self.layout_addGdsuS.addWidget(self.subtitle_addGdsuS)
+        self.layout_addGdsuS.addWidget(self.input_newGdsuS)
+        self.subtitle_addGdsuS.setMaximumWidth(150)
+        self.input_newGdsuS.setMaximumWidth(260)
+
+        self.subtitle_addGdsuU = QLabel("Unidade:")
+        self.subtitle_addGdsuU.setObjectName("subtitle_modes")
+        self.input_newGdsuU = QLineEdit()
         self.input_newGdsuU.setObjectName("inputEditValues")
-        self.input_newLisPri = QLineEdit(placeholderText="Incluir na lista interna? (s/n)")
+        self.layout_addGdsuU = QHBoxLayout()
+        self.layout_addGdsuU.addWidget(self.subtitle_addGdsuU)
+        self.layout_addGdsuU.addWidget(self.input_newGdsuU)
+        self.subtitle_addGdsuU.setMaximumWidth(150)
+        self.input_newGdsuU.setMaximumWidth(260)
+
+        self.subtitle_addLisPri = QLabel("Incluir na lista interna?")
+        self.subtitle_addLisPri.setObjectName("subtitle_modes")
+        self.input_newLisPri = QLineEdit(placeholderText="s/n")
         self.input_newLisPri.setObjectName("inputEditValues")
-        self.input_newLisPub = QLineEdit(placeholderText="Incluir na lista publica? (s/n)")
+        self.layout_addLisPri = QHBoxLayout()
+        self.layout_addLisPri.addWidget(self.subtitle_addLisPri)
+        self.layout_addLisPri.addWidget(self.input_newLisPri)
+        self.subtitle_addLisPri.setMaximumWidth(150)
+        self.input_newLisPri.setMaximumWidth(260)
+
+        self.subtitle_addLisPub = QLabel("Incluir na lista externa?")
+        self.subtitle_addLisPub.setObjectName("subtitle_modes")
+        self.input_newLisPub = QLineEdit(placeholderText="(s/n)")
         self.input_newLisPub.setObjectName("inputEditValues")
-        self.input_newType = QLineEdit(placeholderText="O ramal é do tipo Fila? (s/n)")
+        self.layout_addLisPub = QHBoxLayout()
+        self.layout_addLisPub.addWidget(self.subtitle_addLisPub)
+        self.layout_addLisPub.addWidget(self.input_newLisPub)
+        self.subtitle_addLisPub.setMaximumWidth(150)
+        self.input_newLisPub.setMaximumWidth(260)
+
+        self.subtitle_addType = QLabel("Faz parte de uma Fila?")
+        self.subtitle_addType.setObjectName("subtitle_modes")
+        self.input_newType = QLineEdit(placeholderText="(s/n)")
         self.input_newType.setObjectName("inputEditValues")
-        self.input_newLocalPub = QLineEdit(placeholderText="Localização na lista externa (Necessário apenas se aparecer na lista pública)")
+        self.layout_addType = QHBoxLayout()
+        self.layout_addType.addWidget(self.subtitle_addType)
+        self.layout_addType.addWidget(self.input_newType)
+        self.subtitle_addType.setMaximumWidth(150)
+        self.input_newType.setMaximumWidth(260)
+
+        self.subtitle_addLocalPub = QLabel("Localização na lista externa:")
+        self.subtitle_addLocalPub.setObjectName("subtitle_modes")
+        self.input_newLocalPub = QLineEdit(placeholderText="(Necessário apenas se aparecer na lista pública)")
         self.input_newLocalPub.setObjectName("inputEditValues")
-        self.input_newNamePub = QLineEdit(placeholderText="Nome na lista externa (Necessário apenas se aparecer na lista pública)")
+        self.layout_addLocalPub = QHBoxLayout()
+        self.layout_addLocalPub.addWidget(self.subtitle_addLocalPub)
+        self.layout_addLocalPub.addWidget(self.input_newLocalPub)
+        self.subtitle_addLocalPub.setMaximumWidth(150)
+        self.input_newLocalPub.setMaximumWidth(260)
+
+        self.subtitle_addNomePub = QLabel("Nome na lista externa:")
+        self.subtitle_addNomePub.setObjectName("subtitle_modes")
+        self.input_newNamePub = QLineEdit(placeholderText="(Necessário apenas se aparecer na lista pública)")
         self.input_newNamePub.setObjectName("inputEditValues")
-        self.input_newUpdateDate = QLineEdit(placeholderText="Data")
+        self.layout_addNomePub = QHBoxLayout()
+        self.layout_addNomePub.addWidget(self.subtitle_addNomePub)
+        self.layout_addNomePub.addWidget(self.input_newNamePub)
+        self.subtitle_addNomePub.setMaximumWidth(150)
+        self.input_newNamePub.setMaximumWidth(260)
+
+        self.subtitle_addUpdateDate = QLabel("Data de adição:")
+        self.subtitle_addUpdateDate.setObjectName("subtitle_modes")
+        self.input_newUpdateDate = QLineEdit(placeholderText="dd-mm-aa")
         self.input_newUpdateDate.setObjectName("inputEditValues")
-        self.input_newUpdateMod = QLineEdit("Alteração: Incluso na lista")
+        self.layout_addUpdateDate = QHBoxLayout()
+        self.layout_addUpdateDate.addWidget(self.subtitle_addUpdateDate)
+        self.layout_addUpdateDate.addWidget(self.input_newUpdateDate)
+        self.subtitle_addUpdateDate.setMaximumWidth(150)
+        self.input_newUpdateDate.setMaximumWidth(260)
+
+        self.subtitle_addUpdateMod = QLabel("Alteração")
+        self.subtitle_addUpdateMod.setObjectName("subtitle_modes")
+        self.input_newUpdateMod = QLineEdit("Incluso na lista")
         self.input_newUpdateMod.setObjectName("inputEditValues")
+        self.layout_addUpdateMod = QHBoxLayout()
+        self.layout_addUpdateMod.addWidget(self.subtitle_addUpdateMod)
+        self.layout_addUpdateMod.addWidget(self.input_newUpdateMod)
+        self.subtitle_addUpdateMod.setMaximumWidth(150)
+        self.input_newUpdateMod.setMaximumWidth(260)
+
         self.button_addNewRamal = QPushButton("Criar Ramal")
         self.button_addNewRamal.setObjectName("buttonEditValues")
         self.button_addNewRamal.clicked.connect(self.call_add)
+        self.button_addNewRamal.setMaximumSize(200, 35)
+        self.button_addNewRamal.setMinimumSize(100, 25)
 #         >
 #         add this Widgets to second_part <
         self.layout_panelDownAdd.addWidget(self.title_addMode)
-        self.layout_panelDownAdd.addWidget(self.input_newRamal)
-        self.layout_panelDownAdd.addWidget(self.input_newNome)
-        self.layout_panelDownAdd.addWidget(self.input_newResp)
-        self.layout_panelDownAdd.addWidget(self.input_newGdsuG)
-        self.layout_panelDownAdd.addWidget(self.input_newGdsuD)
-        self.layout_panelDownAdd.addWidget(self.input_newGdsuS)
-        self.layout_panelDownAdd.addWidget(self.input_newGdsuU)
-        self.layout_panelDownAdd.addWidget(self.input_newLisPri)
-        self.layout_panelDownAdd.addWidget(self.input_newLisPub)
-        self.layout_panelDownAdd.addWidget(self.input_newType)
-        self.layout_panelDownAdd.addWidget(self.input_newLocalPub )
-        self.layout_panelDownAdd.addWidget(self.input_newNamePub)
-        self.layout_panelDownAdd.addWidget(self.input_newUpdateDate)
-        self.layout_panelDownAdd.addWidget(self.input_newUpdateMod)
-        self.layout_panelDownAdd.addWidget(self.button_addNewRamal)
+        self.layout_panelDownAdd.addLayout(self.layout_addRamal)
+        self.layout_panelDownAdd.addLayout(self.layout_addNome)
+        self.layout_panelDownAdd.addLayout(self.layout_addResp)
+        self.layout_panelDownAdd.addLayout(self.layout_addGdsuG)
+        self.layout_panelDownAdd.addLayout(self.layout_addGdsuD)
+        self.layout_panelDownAdd.addLayout(self.layout_addGdsuS)
+        self.layout_panelDownAdd.addLayout(self.layout_addGdsuU)
+        self.layout_panelDownAdd.addLayout(self.layout_addLisPri)
+        self.layout_panelDownAdd.addLayout(self.layout_addLisPub)
+        self.layout_panelDownAdd.addLayout(self.layout_addType)
+        self.layout_panelDownAdd.addLayout(self.layout_addLocalPub)
+        self.layout_panelDownAdd.addLayout(self.layout_addNomePub)
+        self.layout_panelDownAdd.addLayout(self.layout_addUpdateDate)
+        self.layout_panelDownAdd.addLayout(self.layout_addUpdateMod)
+        self.layout_panelDownAdd.addWidget(self.button_addNewRamal, alignment=Qt.AlignCenter)
 #         >
 #       ] end of second_part
 #       panel_down(mode: edit) tird_part: delete values [
 #         global settings <
         self.layout_panelDownDelete = QVBoxLayout()
         self.widget_panelDownDelete = QWidget()
+        self.widget_panelDownDelete.setObjectName('widgetPanelDownSubDiv')
         self.widget_panelDownDelete.setLayout(self.layout_panelDownDelete)
 #         >
 #         Widgets of third part <
         self.title_deleteMode = QLabel("Painel de remoção de ramais")
         self.title_deleteMode.setObjectName("title_modes")
+        self.title_deleteMode.setAlignment(Qt.AlignCenter)
 
         self.input_idDelete = QLineEdit(placeholderText="qual o id do item?")
         self.input_idDelete.setObjectName("inputEditValues")
@@ -241,9 +408,16 @@ class Project(QWidget):
 #         >
 #       ] end of tird_part
 #       add the second_part, tird_part and label_avisos to first_part [
-        self.layout_panelDownEdit.addWidget(self.widget_panelDownAdd)
-        self.layout_panelDownEdit.addWidget(self.widget_panelDownDelete)
-        self.layout_panelDownEdit.addWidget(self.label_EditTextArea)
+        self.layout_panelDownMods = QVBoxLayout()
+        self.layout_panelDownMods.addWidget(self.widget_panelDownEdit)
+        self.layout_panelDownMods.addWidget(self.widget_panelDownAdd)
+        self.layout_panelDownMods.addWidget(self.widget_panelDownDelete)
+        self.layout_panelDownMods.addWidget(self.label_EditTextArea)
+
+        self.widget_panelDownMods = QWidget()
+        self.widget_panelDownMods.setLayout(self.layout_panelDownMods)
+
+        self.layout_panelDown.addWidget(self.widget_panelDownMods)
 #       ]
 #       panel_down(mode: convert) [
 #         general settings <
@@ -273,11 +447,13 @@ class Project(QWidget):
 #       ] end of panel_down (mode: convert)
 #   }end of panel_down
 #   Visibility settings of the 3 parts of the panel_down {
+
         self.layout_panelDown.addWidget(self.widget_panelDownSearch)  # Inicialmente visível
-        self.layout_panelDown.addWidget(self.widget_panelDownEdit)  # Inicialmente invisível
+        self.layout_panelDown.addWidget(self.widget_panelDownMods)  # Inicialmente invisível
         self.layout_panelDown.addWidget(self.widget_panelDownConvert) # Inicialmente invisível
 
-        self.widget_panelDownEdit.setVisible(False)  # Inicializa o panel de editar como invisível
+        self.widget_panelDownSearch.setVisible(True)  # Inicializa o panel de editar como invisível
+        self.widget_panelDownMods.setVisible(False)  # Inicializa o panel de Edição como invisível
         self.widget_panelDownConvert.setVisible(False)  # Inicializa o panel de conversão como invisível
 #   }
 #   add the Widgets panel_up and panel_down to Panel_main_layout {
@@ -310,13 +486,13 @@ class Project(QWidget):
         self.widget_panel.setLayout(self.layout_panel)
         self.widget_panel.setObjectName("widgetPanel")
 
-        self.widget_panel.setMinimumWidth(740)
+        self.widget_panel.setMinimumWidth(500)
 #   }
 #   change display in one Widget {
         self.widget_display = QWidget()
         self.widget_display.setLayout(self.layout_display)
 
-        self.widget_display.setMinimumWidth(1060)
+        self.widget_display.setMinimumWidth(800)
 
         self.splitter.addWidget(self.widget_panel)
         self.splitter.addWidget(self.widget_display)
@@ -334,15 +510,15 @@ class Project(QWidget):
 #Functions (
 #   functions of change what is in screen {
     def show_pesquisa(self):
-        show_option_pesquisa(self.opcao_panel, self.widget_panelDownSearch, self.widget_panelDownEdit, self.widget_panelDownConvert)
+        show_option_pesquisa(self.opcao_panel, self.widget_panelDownSearch, self.widget_panelDownMods, self.widget_panelDownConvert)
         atualiza_tabela(self.table)
 
     def show_editar(self):
-        show_option_editar(self.opcao_panel, self.widget_panelDownSearch, self.widget_panelDownEdit, self.widget_panelDownConvert)
+        show_option_editar(self.opcao_panel, self.widget_panelDownSearch, self.widget_panelDownMods, self.widget_panelDownConvert)
         atualiza_tabela(self.table)
 
     def show_converter(self):
-        show_option_converter(self.opcao_panel, self.widget_panelDownSearch, self.widget_panelDownEdit, self.widget_panelDownConvert)
+        show_option_converter(self.opcao_panel, self.widget_panelDownSearch, self.widget_panelDownMods, self.widget_panelDownConvert)
         atualiza_tabela(self.table)
 #   }
 #   function of search mode {
