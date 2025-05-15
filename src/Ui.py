@@ -31,15 +31,15 @@ class Project(QWidget):
 #       ]
 #       settings of buttons that change the screen [
         self.button_Pesquisa = QPushButton("Buscar")
-        self.button_Pesquisa.setObjectName("buttonSearch")
+        self.button_Pesquisa.setObjectName("buttonSwitchMode")
         self.button_Pesquisa.clicked.connect(self.show_pesquisa)
 
         self.button_Edit = QPushButton("Editar")
-        self.button_Edit.setObjectName("buttonEdit")
+        self.button_Edit.setObjectName("buttonSwitchMode")
         self.button_Edit.clicked.connect(self.show_editar)
 
         self.button_Convert = QPushButton("Converter")
-        self.button_Convert.setObjectName("buttonConvert")
+        self.button_Convert.setObjectName("buttonSwitchMode")
         self.button_Convert.clicked.connect(self.show_converter)
 
         self.opcao_panel = QLabel("selecione a função")
@@ -77,7 +77,7 @@ class Project(QWidget):
         self.title_searchMode.setAlignment(Qt.AlignCenter)
 
         self.input_comboboxLocal = QComboBox()
-        self.input_comboboxLocal.setObjectName("inputBase")
+        self.input_comboboxLocal.setObjectName("componentBase")
 
         self.subtitle_searchSelector = QLabel("Filtro da pesquisa")
         self.subtitle_searchSelector.setObjectName("subtitle_modes")
@@ -88,9 +88,9 @@ class Project(QWidget):
         self.subtitle_searchInput = QLabel("Valor da pesquisa")
         self.subtitle_searchInput.setObjectName("subtitle_modes")
         self.input_valueSearch = QLineEdit(placeholderText="O que será procurado?")
-        self.input_valueSearch.setObjectName("inputBase")
+        self.input_valueSearch.setObjectName("componentBase")
         self.button_Search = QPushButton("Buscar")
-        self.button_Search.setObjectName("buttonBase")
+        self.button_Search.setObjectName("componentBase")
         self.button_Search.clicked.connect(self.call_buscar)
 
         self.label_SearchTextArea = QLabel("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
@@ -151,7 +151,7 @@ class Project(QWidget):
         self.subtitle_EditSelector = QLabel("Filtro da edição")
         self.subtitle_EditSelector.setObjectName("subtitle_modes")
         self.input_comboboxCollumn = QComboBox()
-        self.input_comboboxCollumn.setObjectName("inputEditValues")
+        self.input_comboboxCollumn.setObjectName("inputBase")
 
         col_disp_editar = ['ramal', 'nome', 'responsavel', 'Gerencia', 'Divisao', 'Setor', 'Unidade', 'lista privada', 'lista pub', 'type', 'local pub', 'nome_pub', 'ultima atualização', 'ultima modificação']  # Colunas que o usuário pode escolher
         self.input_comboboxCollumn.addItems(col_disp_editar)
@@ -163,10 +163,10 @@ class Project(QWidget):
         self.button_buscarEdit = QPushButton("atualizar")
 
         self.subtitle_editInputId.setObjectName("subtitle_modes")
-        self.input_rowEdit.setObjectName("inputEditValues")
+        self.input_rowEdit.setObjectName("inputBase")
         self.subtitle_editInputValue.setObjectName("subtitle_modes")
-        self.input_valueEdit.setObjectName("inputEditValues")
-        self.button_buscarEdit.setObjectName("buttonEditValues")
+        self.input_valueEdit.setObjectName("inputBase")
+        self.button_buscarEdit.setObjectName("buttonBase")
 
         self.button_buscarEdit.clicked.connect(self.call_editar)
         self.button_buscarEdit.setMaximumSize(150, 30)
@@ -221,7 +221,7 @@ class Project(QWidget):
         self.subtitle_addRamal = QLabel("Insira o ramal:")
         self.subtitle_addRamal.setObjectName("subtitle_modes")
         self.input_newRamal = QLineEdit()
-        self.input_newRamal.setObjectName("inputEditValues")
+        self.input_newRamal.setObjectName("inputBase")
         self.layout_addRamal = QHBoxLayout()
         self.layout_addRamal.addWidget(self.subtitle_addRamal)
         self.layout_addRamal.addWidget(self.input_newRamal)
@@ -231,7 +231,7 @@ class Project(QWidget):
         self.subtitle_addNome = QLabel("Insira o nome:")
         self.subtitle_addNome.setObjectName("subtitle_modes")
         self.input_newNome = QLineEdit()
-        self.input_newNome.setObjectName("inputEditValues")
+        self.input_newNome.setObjectName("inputBase")
         self.layout_addNome = QHBoxLayout()
         self.layout_addNome.addWidget(self.subtitle_addNome)
         self.layout_addNome.addWidget(self.input_newNome)
@@ -241,7 +241,7 @@ class Project(QWidget):
         self.subtitle_addResp = QLabel("Quem é o responsável:")
         self.subtitle_addResp.setObjectName("subtitle_modes")
         self.input_newResp = QLineEdit()
-        self.input_newResp.setObjectName("inputEditValues")
+        self.input_newResp.setObjectName("inputBase")
         self.layout_addResp = QHBoxLayout()
         self.layout_addResp.addWidget(self.subtitle_addResp)
         self.layout_addResp.addWidget(self.input_newResp)
@@ -251,7 +251,7 @@ class Project(QWidget):
         self.subtitle_addGdsuG = QLabel("Gerência:")
         self.subtitle_addGdsuG.setObjectName("subtitle_modes")
         self.input_newGdsuG = QLineEdit()
-        self.input_newGdsuG.setObjectName("inputEditValues")
+        self.input_newGdsuG.setObjectName("inputBase")
         self.layout_addGdsuG = QHBoxLayout()
         self.layout_addGdsuG.addWidget(self.subtitle_addGdsuG)
         self.layout_addGdsuG.addWidget(self.input_newGdsuG)
@@ -261,7 +261,7 @@ class Project(QWidget):
         self.subtitle_addGdsuD = QLabel("Divisão:")
         self.subtitle_addGdsuD.setObjectName("subtitle_modes")
         self.input_newGdsuD = QLineEdit()
-        self.input_newGdsuD.setObjectName("inputEditValues")
+        self.input_newGdsuD.setObjectName("inputBase")
         self.layout_addGdsuD = QHBoxLayout()
         self.layout_addGdsuD.addWidget(self.subtitle_addGdsuD)
         self.layout_addGdsuD.addWidget(self.input_newGdsuD)
@@ -271,7 +271,7 @@ class Project(QWidget):
         self.subtitle_addGdsuS = QLabel("Setor:")
         self.subtitle_addGdsuS.setObjectName("subtitle_modes")
         self.input_newGdsuS = QLineEdit()
-        self.input_newGdsuS.setObjectName("inputEditValues")
+        self.input_newGdsuS.setObjectName("inputBase")
         self.layout_addGdsuS = QHBoxLayout()
         self.layout_addGdsuS.addWidget(self.subtitle_addGdsuS)
         self.layout_addGdsuS.addWidget(self.input_newGdsuS)
@@ -281,7 +281,7 @@ class Project(QWidget):
         self.subtitle_addGdsuU = QLabel("Unidade:")
         self.subtitle_addGdsuU.setObjectName("subtitle_modes")
         self.input_newGdsuU = QLineEdit()
-        self.input_newGdsuU.setObjectName("inputEditValues")
+        self.input_newGdsuU.setObjectName("inputBase")
         self.layout_addGdsuU = QHBoxLayout()
         self.layout_addGdsuU.addWidget(self.subtitle_addGdsuU)
         self.layout_addGdsuU.addWidget(self.input_newGdsuU)
@@ -290,8 +290,8 @@ class Project(QWidget):
 
         self.subtitle_addLisPri = QLabel("Incluir na lista interna?")
         self.subtitle_addLisPri.setObjectName("subtitle_modes")
-        self.input_newLisPri = QLineEdit(placeholderText="s/n")
-        self.input_newLisPri.setObjectName("inputEditValues")
+        self.input_newLisPri = QLineEdit(placeholderText="(s/n)")
+        self.input_newLisPri.setObjectName("inputBase")
         self.layout_addLisPri = QHBoxLayout()
         self.layout_addLisPri.addWidget(self.subtitle_addLisPri)
         self.layout_addLisPri.addWidget(self.input_newLisPri)
@@ -301,7 +301,7 @@ class Project(QWidget):
         self.subtitle_addLisPub = QLabel("Incluir na lista externa?")
         self.subtitle_addLisPub.setObjectName("subtitle_modes")
         self.input_newLisPub = QLineEdit(placeholderText="(s/n)")
-        self.input_newLisPub.setObjectName("inputEditValues")
+        self.input_newLisPub.setObjectName("inputBase")
         self.layout_addLisPub = QHBoxLayout()
         self.layout_addLisPub.addWidget(self.subtitle_addLisPub)
         self.layout_addLisPub.addWidget(self.input_newLisPub)
@@ -311,7 +311,7 @@ class Project(QWidget):
         self.subtitle_addType = QLabel("Faz parte de uma Fila?")
         self.subtitle_addType.setObjectName("subtitle_modes")
         self.input_newType = QLineEdit(placeholderText="(s/n)")
-        self.input_newType.setObjectName("inputEditValues")
+        self.input_newType.setObjectName("inputBase")
         self.layout_addType = QHBoxLayout()
         self.layout_addType.addWidget(self.subtitle_addType)
         self.layout_addType.addWidget(self.input_newType)
@@ -321,7 +321,7 @@ class Project(QWidget):
         self.subtitle_addLocalPub = QLabel("Localização na lista externa:")
         self.subtitle_addLocalPub.setObjectName("subtitle_modes")
         self.input_newLocalPub = QLineEdit(placeholderText="(Necessário apenas se aparecer na lista pública)")
-        self.input_newLocalPub.setObjectName("inputEditValues")
+        self.input_newLocalPub.setObjectName("inputBase")
         self.layout_addLocalPub = QHBoxLayout()
         self.layout_addLocalPub.addWidget(self.subtitle_addLocalPub)
         self.layout_addLocalPub.addWidget(self.input_newLocalPub)
@@ -331,7 +331,7 @@ class Project(QWidget):
         self.subtitle_addNomePub = QLabel("Nome na lista externa:")
         self.subtitle_addNomePub.setObjectName("subtitle_modes")
         self.input_newNamePub = QLineEdit(placeholderText="(Necessário apenas se aparecer na lista pública)")
-        self.input_newNamePub.setObjectName("inputEditValues")
+        self.input_newNamePub.setObjectName("inputBase")
         self.layout_addNomePub = QHBoxLayout()
         self.layout_addNomePub.addWidget(self.subtitle_addNomePub)
         self.layout_addNomePub.addWidget(self.input_newNamePub)
@@ -341,7 +341,7 @@ class Project(QWidget):
         self.subtitle_addUpdateDate = QLabel("Data de adição:")
         self.subtitle_addUpdateDate.setObjectName("subtitle_modes")
         self.input_newUpdateDate = QLineEdit(placeholderText="dd-mm-aa")
-        self.input_newUpdateDate.setObjectName("inputEditValues")
+        self.input_newUpdateDate.setObjectName("inputBase")
         self.layout_addUpdateDate = QHBoxLayout()
         self.layout_addUpdateDate.addWidget(self.subtitle_addUpdateDate)
         self.layout_addUpdateDate.addWidget(self.input_newUpdateDate)
@@ -351,7 +351,7 @@ class Project(QWidget):
         self.subtitle_addUpdateMod = QLabel("Alteração")
         self.subtitle_addUpdateMod.setObjectName("subtitle_modes")
         self.input_newUpdateMod = QLineEdit("Incluso na lista")
-        self.input_newUpdateMod.setObjectName("inputEditValues")
+        self.input_newUpdateMod.setObjectName("inputBase")
         self.layout_addUpdateMod = QHBoxLayout()
         self.layout_addUpdateMod.addWidget(self.subtitle_addUpdateMod)
         self.layout_addUpdateMod.addWidget(self.input_newUpdateMod)
@@ -359,7 +359,7 @@ class Project(QWidget):
         self.input_newUpdateMod.setMaximumWidth(260)
 
         self.button_addNewRamal = QPushButton("Criar Ramal")
-        self.button_addNewRamal.setObjectName("buttonEditValues")
+        self.button_addNewRamal.setObjectName("buttonBase")
         self.button_addNewRamal.clicked.connect(self.call_add)
         self.button_addNewRamal.setMaximumSize(200, 35)
         self.button_addNewRamal.setMinimumSize(100, 25)
@@ -396,9 +396,9 @@ class Project(QWidget):
         self.title_deleteMode.setAlignment(Qt.AlignCenter)
 
         self.input_idDelete = QLineEdit(placeholderText="qual o id do item?")
-        self.input_idDelete.setObjectName("inputEditValues")
+        self.input_idDelete.setObjectName("inputBase")
         self.button_delete = QPushButton("deletar")
-        self.button_delete.setObjectName("buttonEditValues")
+        self.button_delete.setObjectName("buttonBase")
         self.button_delete.clicked.connect(self.call_del)
 #         >
 #         add this Widgets to tird_part <
@@ -428,10 +428,10 @@ class Project(QWidget):
 #         Widgets of panel_down (mode: convert) <
         self.button_convert = QPushButton("converter para HTML")
         self.button_convert.clicked.connect(self.call_converter)
-        self.button_convert.setObjectName("buttonConvertHTML")
+        self.button_convert.setObjectName("buttonBase")
         self.button_copy = QPushButton("copiar")
         self.button_copy.clicked.connect(self.call_copy_html)
-        self.button_copy.setObjectName("buttonCopyHTML")
+        self.button_copy.setObjectName("buttonBase")
 
         self.label_convert = QLabel(">")
         self.label_convert.setObjectName("labelConvertTextArea")
@@ -528,11 +528,14 @@ class Project(QWidget):
 #   }
 #   function of edit mode {
     def call_editar(self):
-        collumn = self.input_comboboxCollumn.currentText()
-        id = int(self.input_rowEdit.text())
-        value = self.input_valueEdit.text()
-        editar(collumn, id, value, self.input_valueEdit, self.label_EditTextArea)
-        atualiza_tabela(self.table)
+        try:
+                collumn = self.input_comboboxCollumn.currentText()
+                id = int(self.input_rowEdit.text())
+                value = self.input_valueEdit.text()
+                editar(collumn, id, value, self.input_valueEdit, self.label_EditTextArea)
+                atualiza_tabela(self.table)
+        except:
+            self.label_EditTextArea.setText("Erro: preencha os campos")
 
     def call_del(self):
         id = int(self.input_idDelete.text())

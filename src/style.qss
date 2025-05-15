@@ -1,105 +1,45 @@
 Project{
-    background-color: white;
+    background-color: #0F3B3B;
 }
+
 /* Widgets */
 #widgetpanelUp {
-    background-color: #0F3B3B;
+    background-color: #005F5F;
 }
 #widgetPanelDown {
     width: 100px; height: 100px;
-    background-color: #0F3B3B;
+    background-color: #005F5F;
 }
 #widgetPanel {
-    background-color: rgb(90, 90, 90);
+    background-color: #008181;
 }
 #widgetPanelDownSubDiv{
-    background-color: #0F3B3B;
+    background-color:#008181;
 }
+
 /* buttons */
-#buttonSearch {
-    background-color: #52DADA;
+#buttonSwitchMode {
+    background-color: #00E7E7;
     color: #000000;
     border: 1px solid black;
     border-radius: 5px;
 }
-#buttonSearch:hover {
-    background-color: lightgoldenrodyellow;
-    color: #000000;
-}
-
-#buttonEdit {
-    width: 10px;
-    background-color: #52DADA;
-    color: #000000;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#buttonEdit:hover {
-    background-color: lightgoldenrodyellow;
+#buttonSwitchMode:hover {
+    background-color: #00A3A3;
     color: #000000;
 }
 
-#buttonConvert {
-    width: 10px;
-    background-color: #52DADA;
-    color: #000000;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#buttonConvert:hover {
-    background-color: lightgoldenrodyellow;
-    color: #000000;
-}
-
-#buttonEditValues {
-    background-color: #0B5B5B;
-    color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#buttonEditValues:hover {
-    background-color: #52DADA;
-    color: black;
-}
-
-#buttonConvertHTML {
-    background-color: #52DADA;
-    color: black;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#buttonConvertHTML:hover {
-    background-color: #00FF00;
-    color: black;
-}
-#buttonCopyHTML {
-    background-color: #52DADA;
-    color: black;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-#buttonCopyHTML:hover {
-    background-color: #00FF00;
-    color: black;
-}
-/* inputs */
-#inputEditValues {
-        background-color: #0B5B5B;
-        color: white;
-        border: 1px solid black;
-        border-radius: 5px;
-    }
-#inputEditValues:hover {
-    background-color: #007A7A;
-}
 /* labels */
 #labelSearchTextArea {
     background-color: #0F3B3B;
     color: white;
     border: 1px solid white;
 }
-#labelEditTextArea {
-    color: white;
+#labelEditTextAreaSucess {
+    color: lightgreen ;
+}
+#labelEditTextAreaError {
+    color: yellow ;
 }
 #labelConvertTextArea {
     background-color: #0F3B3B;
@@ -107,8 +47,10 @@ Project{
     border: 1px solid white;
 }
 #labelPanelOption {
-    background-color: #52DADA;
-    color:black;
+    background-color: #00E7E7;
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 #title_modes{
     background-color: transparent;
@@ -119,9 +61,10 @@ Project{
     background-color: transparent;
     color: white;
 }
+
 /* table */
 #table {
-    background-color: #52DADA;
+    background-color: #00E7E7;
     border: 1px solid black;
     border-radius: 5px;
 }
@@ -131,43 +74,39 @@ Project{
     border-right: 1px dashed black;
 }
 #table::item:selected {
-    background-color: #7DFAFA;
+    background-color: #00C5C5;
     color: black;
-    font-weight: 100;
+    border: 1px solid black;
 }
+
 /* bases */
-#buttonBase {
-    background-color: #0B5B5B;
+#componentBase {
+    background-color: #008181;
     color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#componentBase:hover {
+    background-color: #00A3A3;
+    color: white;
+}
+#buttonBase {
+    background-color: #00C5C5;
+    color: black;
     border: 1px solid black;
     border-radius: 5px;
 }
 #buttonBase:hover {
-    background-color: #007A7A;
+    background-color: lightgoldenrodyellow;
     color: black;
 }
 #inputBase {
-    background-color: #0B5B5B;
-    color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-}
+        background-color: #00C5C5;
+        color: black;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
 #inputBase:hover {
-    background-color: #007A7A;
+    background-color: #00A3A3;
+    color: whitesmoke;
 }
-
-
-/* collors:
-
-brightness
-
-#00EFEF
-#00E7E7
-#00C5C5
-#00A3A3
-#008181
-#005F5F
-
-darkness
-
-*/
