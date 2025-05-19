@@ -73,8 +73,7 @@ def buscar(local, input_valueSearch, label_SearchTextArea):
     except:
         label_SearchTextArea.setText(f"Erro ao validar os dados")
 
-
-def editar(collumn, id, value, input_valueEdit, label_EditTextArea):
+def editar(collumn, id, input_valueEdit, label_EditTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")
     db = pd.read_excel(xls, sheet_name=xls.sheet_names[0])
 
@@ -91,76 +90,37 @@ def editar(collumn, id, value, input_valueEdit, label_EditTextArea):
     
     db.to_excel('src/Ramais.xlsx', index=False) # Save the changes
 
-def dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, new_nome_pub, new_type, new_upd_date, new_upd_mod, label_EditTextArea):
+def dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, 
+              new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, 
+              new_nome_pub, new_type, new_upd_date, new_upd_mod, label_EditTextArea):
     try:
         ramal = int(new_ramal)
     except:
         label_EditTextArea.setText(f"Erro: insira um ramal") #check if there is a ramal, becouse if only mandatory value
-
-    if new_name == '':
-        name = 'Sem nome'
-    else:
-        name = new_name
-
-    if new_nome_pub == '':
-        name_pub = ''
-    else:
-        name_pub = new_nome_pub
     
-    if new_resp == '':
-        resp = 'Sem responsável'
-    else:
-        resp = new_resp
+    name = 'Sem nome' if new_name == '' else new_name
     
-    if new_gdsu_g == '':
-        gdsu_g = 'SEM GERENCIA'
-    else:
-        gdsu_g = new_gdsu_g.upper()
+    name_pub = '' if new_nome_pub == '' else new_nome_pub
 
-    if new_gdsu_d == '':
-        gdsu_d = 'SEM DIVISÃO'
-    else:
-        gdsu_d = new_gdsu_d.upper()
+    resp = 'Sem Responsável' if new_resp == '' else new_resp
 
-    if new_gdsu_s == '':
-        gdsu_s = 'SEM SETOR'
-    else:
-        gdsu_s = new_gdsu_s.upper()
+    gdsu_g = 'SEM GERÊNCIA' if new_gdsu_g == '' else new_gdsu_g.upper()
+    gdsu_d = 'SEM DIVISÃO' if new_gdsu_d == '' else new_gdsu_d.upper()
+    gdsu_s = 'SEM SETOR' if new_gdsu_s == '' else new_gdsu_s.upper()
+    gdsu_u = 'SEM UNIDADE' if new_gdsu_u == '' else new_gdsu_u.upper()
 
-    if new_gdsu_u == '':
-        gdsu_u = 'SEM UNIDADE'
-    else:
-        gdsu_u = new_gdsu_u.upper()
+    priv_list = 'n' if new_priv_list == '' else new_priv_list
 
-    if new_priv_list == '':
-        priv_list = 'n'
-    else:
-        priv_list = new_priv_list
+    pub_list = 'n' if new_pub_list == '' else new_pub_list
 
-    if new_pub_list == '':
-        pub_list = 'n'
-    else:
-        pub_list = new_pub_list
-
-    if new_local_pub == '':
-        local_pub = ''
-    else:
-        local_pub = new_local_pub
+    local_pub = '' if new_local_pub == '' else new_local_pub
     
-    if new_type == '':
-        tipo = 'P'
-    else:
-        tipo = new_type
+    tipo = 'P' if new_type == 'P' else new_type
     
-    if new_upd_date == '':
-        upd_date = 'aaaa/mm/dd 00:00:00'
-    else:
-        upd_date = new_upd_date
-    
-    if new_upd_mod == '':
-        upd_mod = 'Incluso na lista'
-    else:
-        upd_mod = new_upd_mod
+    upd_date = 'dd-mm-aa' if new_upd_date == '' else new_upd_date
+
+    upd_mod = 'Incluso na lista' if new_upd_mod == '' else new_upd_mod
+
 # Create a object with all the informations
     ramal_novo = pd.DataFrame({
                 'id': [new_id],
@@ -182,7 +142,10 @@ def dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new
 #return the object
     return ramal_novo
 
-def adicionar(new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, new_nome_pub, new_type, new_upd_date, new_upd_mod, label_EditTextArea):
+def adicionar(new_ramal, new_name, new_resp, new_gdsu_g,
+              new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list,
+              new_pub_list, new_local_pub, new_nome_pub, new_type,
+              new_upd_date, new_upd_mod, label_EditTextArea):
     xls = pd.ExcelFile("src/Ramais.xlsx")
     db = pd.read_excel(xls, sheet_name=xls.sheet_names[0])
 #create a new id
@@ -191,7 +154,10 @@ def adicionar(new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s,
 
     if db is not None:
         #create the object 'ramal novo' with the funciton 'dados_adc', that return the object 'ramal_novo'
-        ramal_novo = dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u, new_priv_list, new_pub_list, new_local_pub, new_nome_pub, new_type, new_upd_date, new_upd_mod, label_EditTextArea)
+        ramal_novo = dados_adc(new_id, new_ramal, new_name, new_resp,
+                               new_gdsu_g, new_gdsu_d, new_gdsu_s, new_gdsu_u,
+                               new_priv_list, new_pub_list, new_local_pub, new_nome_pub,
+                               new_type, new_upd_date, new_upd_mod, label_EditTextArea)
         #Concatenating the DBs
         db = pd.concat([db, ramal_novo], ignore_index=True)
         

@@ -24,12 +24,9 @@ def converter_lis_pub():
         if row['lista pub'] == 's': #select only the ramais that are in 'lista publica'
             valor_ramal = str(row["ramal"])
 
-            if len(valor_ramal) > 4 :
-                valor_ramal = valor_ramal[:-2]
-            else:
-                valor_ramal = valor_ramal
+            valor_ramal = valor_ramal[:-2] if len(valor_ramal) > 4 else valor_ramal
 
-            if len(valor_ramal) < 4 :
+            if len(valor_ramal) < 4:  
                 valor_ramal = f'0{valor_ramal}'
             else:
                 valor_ramal = valor_ramal
@@ -41,7 +38,9 @@ def converter_lis_pub():
             else:
                 nome_ramal = 'erro no nome ou tipo do ramal'
 
-            ramal_f = f"<tr><td><p><span>{nome_ramal}</span></p></td><td><p class=\"text-nowrap\" style=\"text-align: end;\"><span>3410 - {valor_ramal}</span></p></td></tr>"
+            ramal_f = f"<tr><td><p><span>{nome_ramal}</span></p></td><td>"\
+                       "<p class=\"text-nowrap\" style=\"text-align: end;\"><span>3410 - {valor_ramal}</span>" \
+                       "</p></td></tr>"
 
             local_pub = row['local pub'] if pd.notna(row['Divisao']) and row['Divisao'] != "" else invisivel
 
@@ -52,13 +51,21 @@ def converter_lis_pub():
 #Add the ramal to the group
             grouped_data[local_pub].append(ramal_f)
 #Starts the creation of HTML with the header
-    html_output = "<div style=\"text-align: center; \"><div class=\"d-flex flex-column justify-content-center align-items-center\"><table><tbody><tr><td colspan=\"2\">" \
-                  "<p class=\"text-center\" style=\"text-align: center; \"><strong>TELEFONES ÚTEIS</strong></p><p class=\"text-center\" style=\"text-align: center; \">" \
-                  "<strong>HOSPITAL UNIVERSITÁRIO DA GRANDE DOURADOS<br /></strong> </p></td></tr><tr><td colspan=\"2\"><p> </p><p class=\"text-center\"><strong>" \
-                  "​</strong></p></td></tr><div class=\"d-flex flex-column justify-content-center align-items-center\">"
+    html_output = "<div style=\"text-align: center; \">"\
+                "<div class=\"d-flex flex-column justify-content-center align-items-center\">"\
+                "<table><tbody><tr><td colspan=\"2\">"\
+                "<p class=\"text-center\" style=\"text-align: center; \">"\
+                "<strong>TELEFONES ÚTEIS</strong>"\
+                "</p><p class=\"text-center\" style=\"text-align: center; \">"\
+                "<strong>HOSPITAL UNIVERSITÁRIO DA GRANDE DOURADOS<br /></strong>"\
+                "</p></td></tr><tr><td colspan=\"2\"><p> </p>"\
+                "<p class=\"text-center\"><strong>​</strong></p></td></tr>"\
+                "<div class=\"d-flex flex-column justify-content-center align-items-center\">"
 
     for local_pub, ramais in grouped_data.items():
-        html_output += f"<tr><td colspan=\"2\"><p> </p><p class=\"text-center\"><strong>{local_pub}</strong></p></td></tr><table><tbody>"
+        html_output += f"<tr><td colspan=\"2\"><p> </p>"\
+            "<p class=\"text-center\"><strong>{local_pub}</strong></p>"\
+            "</td></tr><table><tbody>"
 
         for ramal in ramais:
             html_output += ramal
@@ -157,7 +164,11 @@ def converter_lis_pesquisa():
     #Start the dictionary to group the ramais
     grouped_data = {}
     # Create the header of HTML
-    html_output = "<div class=\"mt-5 ms-n1\"><p style=\"text-align: center; column-span: 2;\"><strong>        LISTA COMPLETA DE RAMAIS</strong></p><p style=\"text-align: center; column-span: 2\">        Para pesquisar, expanda a lista e pressione 'Ctrl' + 'F'</p><a class=\"toggle closed\">EXIBIR TODOS OS RAMAIS</a><div class=\"conteudo\"><div class=\"d-flex justify-content-center\"><table><tbody>"
+    html_output = "<div class=\"mt-5 ms-n1\"><p style=\"text-align: center; column-span: 2;\">"\
+                "<strong>        LISTA COMPLETA DE RAMAIS</strong></p>"\
+                "<p style=\"text-align: center; column-span: 2\">        Para pesquisar, expanda a lista e pressione 'Ctrl' + 'F'</p>"\
+                "<a class=\"toggle closed\">EXIBIR TODOS OS RAMAIS</a><div class=\"conteudo\">"\
+                "<div class=\"d-flex justify-content-center\"><table><tbody>"
     
     for index, row in db.iterrows():
         if row['lista privada'] == 's':  #select only the ramais that are in 'lista privada'

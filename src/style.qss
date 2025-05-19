@@ -35,11 +35,8 @@ Project{
     color: white;
     border: 1px solid white;
 }
-#labelEditTextAreaSucess {
-    color: lightgreen ;
-}
-#labelEditTextAreaError {
-    color: yellow ;
+#labelEditTextArea {
+    color: white ;
 }
 #labelConvertTextArea {
     background-color: #0F3B3B;
