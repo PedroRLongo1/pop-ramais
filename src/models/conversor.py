@@ -38,9 +38,7 @@ def converter_lis_pub():
             else:
                 nome_ramal = 'erro no nome ou tipo do ramal'
 
-            ramal_f = f"<tr><td><p><span>{nome_ramal}</span></p></td><td>"\
-                       "<p class=\"text-nowrap\" style=\"text-align: end;\"><span>3410 - {valor_ramal}</span>" \
-                       "</p></td></tr>"
+            ramal_f = f"<tr><td><p><span>{nome_ramal}</span></p></td><td><p class=\"text-nowrap\" style=\"text-align: end;\"><span>3410 - {valor_ramal}</span></p></td></tr>"
 
             local_pub = row['local pub'] if pd.notna(row['Divisao']) and row['Divisao'] != "" else invisivel
 
@@ -63,9 +61,7 @@ def converter_lis_pub():
                 "<div class=\"d-flex flex-column justify-content-center align-items-center\">"
 
     for local_pub, ramais in grouped_data.items():
-        html_output += f"<tr><td colspan=\"2\"><p> </p>"\
-            "<p class=\"text-center\"><strong>{local_pub}</strong></p>"\
-            "</td></tr><table><tbody>"
+        html_output += f"<tr><td colspan=\"2\"><p> </p><p class=\"text-center\"><strong>{local_pub}</strong></p></td></tr><table><tbody>"
 
         for ramal in ramais:
             html_output += ramal

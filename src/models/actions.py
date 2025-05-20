@@ -104,10 +104,10 @@ def dados_adc(new_id, new_ramal, new_name, new_resp, new_gdsu_g, new_gdsu_d,
 
     resp = 'Sem Responsável' if new_resp == '' else new_resp
 
-    gdsu_g = 'SEM GERÊNCIA' if new_gdsu_g == '' else new_gdsu_g.upper()
-    gdsu_d = 'SEM DIVISÃO' if new_gdsu_d == '' else new_gdsu_d.upper()
-    gdsu_s = 'SEM SETOR' if new_gdsu_s == '' else new_gdsu_s.upper()
-    gdsu_u = 'SEM UNIDADE' if new_gdsu_u == '' else new_gdsu_u.upper()
+    gdsu_g = '' if new_gdsu_g == '' else new_gdsu_g.upper()
+    gdsu_d = '' if new_gdsu_d == '' else new_gdsu_d.upper()
+    gdsu_s = '' if new_gdsu_s == '' else new_gdsu_s.upper()
+    gdsu_u = '' if new_gdsu_u == '' else new_gdsu_u.upper()
 
     priv_list = 'n' if new_priv_list == '' else new_priv_list
 
